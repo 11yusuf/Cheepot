@@ -1,5 +1,6 @@
 package zn2.ft.aj.cheepot;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,8 +18,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends Activity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
     private EditText editEmail;
@@ -31,10 +34,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-
         mAuth = FirebaseAuth.getInstance();
-
         buttonSeConnecter = (Button) findViewById(R.id.buttonSeConnecter);
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
@@ -50,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
     private void userLogin(){
-        String email = editEmail.getText().toString().trim();
+        final String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
@@ -71,7 +73,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
-                            // move to profile
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Intent goToProfil = new Intent(LoginActivity.this, ProfilActivity.class);
+                            goToProfil.putExtra("IdProfil",user.getUid());
+                            startActivity(goToProfil);
                         }
                     }
                 });
