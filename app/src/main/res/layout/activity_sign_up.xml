@@ -15,11 +15,50 @@
         >
         <EditText
             android:layout_margin="15dp"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editFamilyName"
+            android:hint="Nom"
+            />
+        <EditText
+            android:layout_margin="15dp"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editName"
+            android:hint="Prénom"
+            />
+        <LinearLayout
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="173dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:hint="Date de naissance"
+                android:inputType="text" />
+
+            <ImageButton
+                android:id="@+id/calendar"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:background="#00000000"
+                android:src="@drawable/ic_calendar" />
+
+        </LinearLayout>
+        <EditText
+            android:layout_margin="15dp"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editEmail"
-            android:hint="Enter your email"
+            android:hint="Adresse Mail"
             />
         <EditText
             android:layout_margin="15dp"
@@ -27,8 +66,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editPassword"
-            android:hint="Enter your password"
+            android:hint="Mot de passe"
             />
+        <EditText
+            android:layout_margin="15dp"
+            android:inputType="textPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editRePassword"
+            android:hint="Confirmer mot de passe"
+            />
+
+
         <Button
             android:layout_margin="15dp"
             android:id="@+id/buttonRegister"

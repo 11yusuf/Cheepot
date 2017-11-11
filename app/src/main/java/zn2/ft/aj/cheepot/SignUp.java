@@ -1,14 +1,21 @@
 package zn2.ft.aj.cheepot;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,23 +27,58 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SignUp extends AppCompatActivity implements  View.OnClickListener {
+import java.util.Calendar;
+import java.util.Date;
+
+import static android.app.DatePickerDialog.*;
+import static android.graphics.Color.TRANSPARENT;
+
+public class SignUp extends AppCompatActivity implements  OnClickListener {
 
     private FirebaseAuth mAuth;
     private Button buttonRegister;
+    private EditText editName ;
+    private EditText editFamilyName;
+    private TextView dateDeNaissance;
+    private ImageButton calendar;
+    private OnDateSetListener DateSetListener;
     private EditText editEmail;
     private EditText editPassword;
+    private EditText editRePassword;
+
     private TextView textViewSignin;
     private ProgressDialog progressDialog;
+    private int year;
+    private int month;
+    private int day;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        year = 0;
         setContentView(R.layout.activity_sign_up);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        editName = (EditText) findViewById(R.id.editName);
+        editFamilyName = (EditText) findViewById(R.id.editFamilyName);
+        dateDeNaissance = (TextView) findViewById(R.id.date);
+        calendar = (ImageButton) findViewById(R.id.calendar) ;
+        calendar.setOnClickListener(this);
+
+        DateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                dateDeNaissance.setText(String.format("%d/%d/%d", day, month, year));
+            }
+        };
+
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
+        editRePassword = (EditText) findViewById(R.id.editRePassword);
+
+
+
+
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
         buttonRegister.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
@@ -54,27 +96,66 @@ public class SignUp extends AppCompatActivity implements  View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view == buttonRegister) {
+        if (view == calendar) {
+            Calendar cal = Calendar.getInstance();
+            year = cal.get(Calendar.YEAR);
+            month = cal.get(Calendar.MONTH);
+            day = cal.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog dialog = new DatePickerDialog(
+                    SignUp.this,
+            android.R.style.Theme_DeviceDefault_Dialog_MinWidth, DateSetListener, year, month, day);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+        }
+
+
+        else if (view == buttonRegister) {
             registerUser();
         } else if (view == textViewSignin) {
             // will open login activity
         }
     }
 
+
+
     private void registerUser() {
+        String name =  editName.getText().toString().trim();
+        String familyName = editFamilyName.getText().toString().trim();
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
+        String Repassword = editRePassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(this, "Entrez votre nom SVP", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(familyName)) {
+            Toast.makeText(this, "Entrez votre prenom SVP", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if ( year == 0 ){
+            Toast.makeText(this, "Entrez votre date de naissance SVP", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Entrez votre mail SVP", Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Entrez un mot de passe", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(Repassword)) {
+            Toast.makeText(this, "Veuillez réecrire votre mot de passe", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        progressDialog.setMessage("Registering User ...");
+
+        progressDialog.setMessage("Tic Tac... Tic Tac ...");
         progressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -91,7 +172,7 @@ public class SignUp extends AppCompatActivity implements  View.OnClickListener {
                             startActivity(homeIntent);
                             finish();
                         } else {
-                            Toast.makeText(SignUp.this, "please 3awed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUp.this, "Vous etes déjà inscrit", Toast.LENGTH_SHORT).show();
                         }
 
                     }
