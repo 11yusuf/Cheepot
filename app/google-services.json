@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "724360745241",
+    "firebase_url": "https://cheepot-9080c.firebaseio.com",
+    "project_id": "cheepot-9080c",
+    "storage_bucket": "cheepot-9080c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:724360745241:android:f59fb2ce6a9f63e1",
+        "android_client_info": {
+          "package_name": "zn2.ft.aj.cheepot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "724360745241-eelviop2ms1vc8e55h3ouuk8h4sdnt3r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "zn2.ft.aj.cheepot",
+            "certificate_hash": "c96a7ea65aabe28a46290047bd0f31dfdb841f04"
+          }
+        },
+        {
+          "client_id": "724360745241-bo4id1jdoa8ce5a8qmtaro1kgb3hhde8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATTnJU_8vNRXHPW0f2ZYo3pxtwRG-k6Lk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "724360745241-bo4id1jdoa8ce5a8qmtaro1kgb3hhde8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
