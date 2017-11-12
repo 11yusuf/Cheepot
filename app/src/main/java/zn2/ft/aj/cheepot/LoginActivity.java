@@ -77,6 +77,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                             Intent goToProfil = new Intent(LoginActivity.this, ProfilActivity.class);
                             goToProfil.putExtra("IdProfil",user.getUid());
                             startActivity(goToProfil);
+                            finish();
                         }
                     }
                 });

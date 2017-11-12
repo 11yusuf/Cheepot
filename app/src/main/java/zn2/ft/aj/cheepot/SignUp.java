@@ -174,7 +174,6 @@ public class SignUp extends AppCompatActivity implements  OnClickListener {
                         } else {
                             Toast.makeText(SignUp.this, "Vous etes déjà inscrit", Toast.LENGTH_SHORT).show();
                         }
-
                     }
 
 
