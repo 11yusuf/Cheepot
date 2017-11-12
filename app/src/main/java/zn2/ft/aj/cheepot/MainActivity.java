@@ -38,5 +38,4 @@ public class MainActivity extends Activity {
             }
         },SPLASH_TIME_OUT);
     }
-
 }

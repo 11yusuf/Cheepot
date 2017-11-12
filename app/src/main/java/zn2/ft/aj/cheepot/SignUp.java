@@ -1,5 +1,6 @@
 package zn2.ft.aj.cheepot;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -33,7 +35,7 @@ import java.util.Date;
 import static android.app.DatePickerDialog.*;
 import static android.graphics.Color.TRANSPARENT;
 
-public class SignUp extends AppCompatActivity implements  OnClickListener {
+public class SignUp extends Activity implements  OnClickListener {
 
     private FirebaseAuth mAuth;
     private Button buttonRegister;
@@ -55,8 +57,8 @@ public class SignUp extends AppCompatActivity implements  OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         mAuth = FirebaseAuth.getInstance();
-        year = 0;
         setContentView(R.layout.activity_sign_up);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         editName = (EditText) findViewById(R.id.editName);
@@ -64,7 +66,6 @@ public class SignUp extends AppCompatActivity implements  OnClickListener {
         dateDeNaissance = (TextView) findViewById(R.id.date);
         calendar = (ImageButton) findViewById(R.id.calendar) ;
         calendar.setOnClickListener(this);
-
         DateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
@@ -75,15 +76,11 @@ public class SignUp extends AppCompatActivity implements  OnClickListener {
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
         editRePassword = (EditText) findViewById(R.id.editRePassword);
-
-
-
-
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
         buttonRegister.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
-
+        year = 0;
     }
 /*
     @Override

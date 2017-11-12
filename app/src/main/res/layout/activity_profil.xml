@@ -4,20 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="zn2.ft.aj.cheepot.ProfilActivity">
+    tools:context="zn2.ft.aj.cheepot.ProfilActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
+
     <LinearLayout
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="horizontal"
+        android:id="@+id/Linearlayout">
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_girl"
+            app:border_color="@color/black"
+            app:border_width="2dp" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/grenadeCircle"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="10dp"
+            app:cardBackgroundColor="@android:color/background_light"
+            app:cardCornerRadius="40dp">
+
+            <ImageView
+                android:id="@+id/grenadeImage"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/ic_grenade"></ImageView>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
     <TextView
         android:id="@+id/profilName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Helo world!"
-        tools:layout_editor_absoluteX="144dp"
-        tools:layout_editor_absoluteY="76dp" />
-    </LinearLayout>
+        android:layout_width="285dp"
+        android:layout_height="107dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Linearlayout" />
+
+
 </android.support.constraint.ConstraintLayout>
