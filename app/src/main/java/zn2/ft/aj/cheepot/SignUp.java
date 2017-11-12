@@ -35,11 +35,11 @@ import java.util.Date;
 import static android.app.DatePickerDialog.*;
 import static android.graphics.Color.TRANSPARENT;
 
-public class SignUp extends Activity implements  OnClickListener {
+public class SignUp extends Activity implements OnClickListener {
 
     private FirebaseAuth mAuth;
     private Button buttonRegister;
-    private EditText editName ;
+    private EditText editName;
     private EditText editFamilyName;
     private TextView dateDeNaissance;
     private ImageButton calendar;
@@ -64,12 +64,12 @@ public class SignUp extends Activity implements  OnClickListener {
         editName = (EditText) findViewById(R.id.editName);
         editFamilyName = (EditText) findViewById(R.id.editFamilyName);
         dateDeNaissance = (TextView) findViewById(R.id.date);
-        calendar = (ImageButton) findViewById(R.id.calendar) ;
+        calendar = (ImageButton) findViewById(R.id.calendar);
         calendar.setOnClickListener(this);
         DateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                dateDeNaissance.setText(String.format("%d/%d/%d", day, month, year));
+                dateDeNaissance.setText(String.format("Date de naissance: %d/%d/%d", day, month, year));
             }
         };
 
@@ -101,29 +101,27 @@ public class SignUp extends Activity implements  OnClickListener {
 
             DatePickerDialog dialog = new DatePickerDialog(
                     SignUp.this,
-            android.R.style.Theme_DeviceDefault_Dialog_MinWidth, DateSetListener, year, month, day);
+                    android.R.style.Theme_DeviceDefault_Dialog_MinWidth, DateSetListener, year, month, day);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
-        }
-
-
-        else if (view == buttonRegister) {
+        } else if (view == buttonRegister) {
             registerUser();
         } else if (view == textViewSignin) {
-            // will open login activity
+            Intent goToLogin = new Intent(SignUp.this, LoginActivity.class);
+            startActivity(goToLogin);
+            finish();
         }
     }
 
 
-
     private void registerUser() {
 
-        final String name =  editName.getText().toString().trim();
+        final String name = editName.getText().toString().trim();
         final String familyName = editFamilyName.getText().toString().trim();
         String email = editEmail.getText().toString().trim();
         final String password = editPassword.getText().toString().trim();
 
-        if (!valideRegister()){
+        if (!valideRegister()) {
             return;
         }
         progressDialog.setMessage("Tic Tac... Tic Tac ...");
@@ -137,10 +135,12 @@ public class SignUp extends Activity implements  OnClickListener {
                             Toast.makeText(SignUp.this, "registered successfully", Toast.LENGTH_SHORT).show();
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("users");
                             DatabaseReference currentUserDb = myRef.child(mAuth.getCurrentUser().getUid());
+                            User user = new User(name,familyName,String.format("%d/%d/%d", day, month, year),password);
                             currentUserDb.child("name").setValue(name);
                             currentUserDb.child("family name").setValue(familyName);
                             currentUserDb.child("dateDeNaissance").setValue(dateDeNaissance.getText().toString());
-                            currentUserDb.child("password").setValue(password);
+                            currentUserDb.child("password").setValue(MD5.crypt(password));
+                            //currentUserDb.setValue(user);
                             Intent homeIntent = new Intent(SignUp.this, MainActivity.class);
                             startActivity(homeIntent);
                             finish();
@@ -155,8 +155,8 @@ public class SignUp extends Activity implements  OnClickListener {
 
     }
 
-    private boolean valideRegister(){
-        String name =  editName.getText().toString().trim();
+    private boolean valideRegister() {
+        String name = editName.getText().toString().trim();
         String familyName = editFamilyName.getText().toString().trim();
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
@@ -172,7 +172,7 @@ public class SignUp extends Activity implements  OnClickListener {
             return false;
         }
 
-        if ( year == 0 ){
+        if (year == 0) {
             Toast.makeText(this, "Entrez votre date de naissance SVP", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -185,7 +185,11 @@ public class SignUp extends Activity implements  OnClickListener {
             Toast.makeText(this, "Entrez un mot de passe", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if ( !Repassword.equals(password)) {
+        if (password.length() < 8) {
+            Toast.makeText(this, "mot de passe trés court,  enter minimum 6 characters", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (!Repassword.equals(password)) {
             Toast.makeText(this, "Veuillez réecrire votre mot de passe", Toast.LENGTH_SHORT).show();
             return false;
         }
