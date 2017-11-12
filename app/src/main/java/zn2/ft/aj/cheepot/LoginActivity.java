@@ -52,7 +52,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     }
     private void userLogin(){
-        final String email = editEmail.getText().toString().trim();
+        String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
@@ -77,6 +77,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                             Intent goToProfil = new Intent(LoginActivity.this, ProfilActivity.class);
                             goToProfil.putExtra("IdProfil",user.getUid());
                             startActivity(goToProfil);
+                            finish();
                         }
                     }
                 });

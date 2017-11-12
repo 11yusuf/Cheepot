@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "724360745241-rr5tp78irhe252jr5fuqfjioktedl8nn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "zn2.ft.aj.cheepot",
+            "certificate_hash": "10f549825640684b67cf77a45c33c306f4cc9a75"
+          }
+        },
+        {
           "client_id": "724360745241-eelviop2ms1vc8e55h3ouuk8h4sdnt3r.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -120,41 +120,15 @@ public class SignUp extends AppCompatActivity implements  OnClickListener {
 
 
     private void registerUser() {
-        String name =  editName.getText().toString().trim();
-        String familyName = editFamilyName.getText().toString().trim();
+
+        final String name =  editName.getText().toString().trim();
+        final String familyName = editFamilyName.getText().toString().trim();
         String email = editEmail.getText().toString().trim();
-        String password = editPassword.getText().toString().trim();
-        String Repassword = editRePassword.getText().toString().trim();
+        final String password = editPassword.getText().toString().trim();
 
-        if (TextUtils.isEmpty(name)) {
-            Toast.makeText(this, "Entrez votre nom SVP", Toast.LENGTH_SHORT).show();
+        if (!valideRegister()){
             return;
         }
-
-        if (TextUtils.isEmpty(familyName)) {
-            Toast.makeText(this, "Entrez votre prenom SVP", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if ( year == 0 ){
-            Toast.makeText(this, "Entrez votre date de naissance SVP", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Entrez votre mail SVP", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Entrez un mot de passe", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(Repassword)) {
-            Toast.makeText(this, "Veuillez réecrire votre mot de passe", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-
         progressDialog.setMessage("Tic Tac... Tic Tac ...");
         progressDialog.show();
 
@@ -166,8 +140,10 @@ public class SignUp extends AppCompatActivity implements  OnClickListener {
                             Toast.makeText(SignUp.this, "registered successfully", Toast.LENGTH_SHORT).show();
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("users");
                             DatabaseReference currentUserDb = myRef.child(mAuth.getCurrentUser().getUid());
-                            currentUserDb.child("name").setValue("tataatatattata");
-                            currentUserDb.child("dateDeNaissance").setValue("5641");
+                            currentUserDb.child("name").setValue(name);
+                            currentUserDb.child("family name").setValue(familyName);
+                            currentUserDb.child("dateDeNaissance").setValue(dateDeNaissance.getText().toString());
+                            currentUserDb.child("password").setValue(password);
                             Intent homeIntent = new Intent(SignUp.this, MainActivity.class);
                             startActivity(homeIntent);
                             finish();
@@ -181,6 +157,44 @@ public class SignUp extends AppCompatActivity implements  OnClickListener {
                 });
 
     }
+
+    private boolean valideRegister(){
+        String name =  editName.getText().toString().trim();
+        String familyName = editFamilyName.getText().toString().trim();
+        String email = editEmail.getText().toString().trim();
+        String password = editPassword.getText().toString().trim();
+        String Repassword = editRePassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(this, "Entrez votre nom SVP", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (TextUtils.isEmpty(familyName)) {
+            Toast.makeText(this, "Entrez votre prenom SVP", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if ( year == 0 ){
+            Toast.makeText(this, "Entrez votre date de naissance SVP", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "Entrez votre mail SVP", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Entrez un mot de passe", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if ( !Repassword.equals(password)) {
+            Toast.makeText(this, "Veuillez réecrire votre mot de passe", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
 }
+
 
 
