@@ -11,9 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/cheepot"
-        android:text="Cheepot"
         android:textSize="80dp"
         android:textStyle="bold"
+        android:inputType="text"
+        android:text="Cheepot"
         android:layout_marginHorizontal="40dp"
         android:layout_marginTop="300dp"
         />

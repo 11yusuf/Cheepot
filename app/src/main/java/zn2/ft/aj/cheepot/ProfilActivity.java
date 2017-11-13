@@ -30,5 +30,4 @@ public class ProfilActivity extends Activity {
         String idProfil = bundle.getString("IdProfil");
         profilName.setText(idProfil);
     }
-
 }

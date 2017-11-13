@@ -78,6 +78,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                             goToProfil.putExtra("IdProfil",user.getUid());
                             startActivity(goToProfil);
                             finish();
+                        }else {
+                            Toast.makeText(LoginActivity.this, "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -94,7 +96,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             // will open mot de passe recovery
         }
         if (view == textViewCreerCompte) {
-            nextIntent = new Intent(LoginActivity.this, SignUp.class);
+            nextIntent = new Intent(LoginActivity.this, SignUpActivity.class);
             finish();
             startActivity(nextIntent);
         }

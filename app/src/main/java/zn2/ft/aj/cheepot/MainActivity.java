@@ -23,14 +23,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends Activity {
     private TextView coded;
-    private static int SPLASH_TIME_OUT = 5000 ;
+    private static int SPLASH_TIME_OUT = 5000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        coded = (TextView) findViewById(R.id.cheepot);
         setContentView(R.layout.activity_main);
-        coded.setText(MD5.crypt("Cheepot"));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -38,6 +37,6 @@ public class MainActivity extends Activity {
                 startActivity(homeIntent);
                 finish();
             }
-        },SPLASH_TIME_OUT);
+        }, SPLASH_TIME_OUT);
     }
 }
