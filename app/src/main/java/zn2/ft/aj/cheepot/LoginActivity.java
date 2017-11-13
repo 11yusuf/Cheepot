@@ -52,7 +52,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     }
     private void userLogin(){
-        final String email = editEmail.getText().toString().trim();
+        String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {

@@ -15,6 +15,7 @@ public class ProfilActivity extends Activity {
         setContentView(R.layout.activity_profil);
         Bundle bundle = getIntent().getExtras();
         String idProfil = bundle.getString("IdProfil");
+
     }
 
 }

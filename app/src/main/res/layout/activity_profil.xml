@@ -5,5 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="zn2.ft.aj.cheepot.ProfilActivity">
-
+    <LinearLayout
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <TextView
+        android:id="@+id/profilName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Helo world!"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="76dp" />
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
