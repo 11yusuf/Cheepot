@@ -97,11 +97,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             nextIntent = new Intent(LoginActivity.this, SignUp.class);
             finish();
             startActivity(nextIntent);
-
         }
         if (view == textViewIci) {
             // sign up partenaire
         }
     }
-
 }
