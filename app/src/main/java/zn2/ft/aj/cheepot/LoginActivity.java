@@ -54,7 +54,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private void userLogin(){
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
-
+        try {
+            password = MD5.crypt(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erreur de sécurité, Réessayer", Toast.LENGTH_SHORT).show();
+        }
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Entrez votre email SVP", Toast.LENGTH_SHORT).show();
             return;
@@ -97,8 +102,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         }
         if (view == textViewCreerCompte) {
             nextIntent = new Intent(LoginActivity.this, SignUpActivity.class);
-            finish();
             startActivity(nextIntent);
+            finish();
         }
         if (view == textViewIci) {
             // sign up partenaire

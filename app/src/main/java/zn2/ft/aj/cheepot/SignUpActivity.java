@@ -36,7 +36,6 @@ import static android.app.DatePickerDialog.*;
 import static android.graphics.Color.TRANSPARENT;
 
 public class SignUpActivity extends Activity implements OnClickListener {
-
     private FirebaseAuth mAuth;
     private Button buttonRegister;
     private EditText editName;
@@ -47,7 +46,6 @@ public class SignUpActivity extends Activity implements OnClickListener {
     private EditText editEmail;
     private EditText editPassword;
     private EditText editRePassword;
-
     private TextView textViewSignin;
     private ProgressDialog progressDialog;
     private int year;
@@ -58,8 +56,8 @@ public class SignUpActivity extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_sign_up);
+        mAuth = FirebaseAuth.getInstance();
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         editName = (EditText) findViewById(R.id.editName);
         editFamilyName = (EditText) findViewById(R.id.editFamilyName);

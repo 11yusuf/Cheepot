@@ -9,7 +9,7 @@
     tools:layout_editor_absoluteY="81dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -19,29 +19,51 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="6dp"
-                android:src="@drawable/ic_girl"
-                app:border_color="@color/black"
-                app:border_width="2dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="6dp"
+                    android:src="@drawable/ic_girl"
+                    app:border_color="@color/black"
+                    app:border_width="2dp" />
+
+                <TextView
+                    android:id="@+id/profilName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:textAlignment="center"
+                    android:layout_marginVertical="6dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentStart="true"
+                    android:text="TextView"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.506"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/badge_notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
                 android:layout_marginTop="20dp">
 
                 <RelativeLayout
                     android:id="@+id/relative_layout1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp">
 
                     <Button
                         android:id="@+id/buttonNotification"
@@ -56,7 +78,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@id/relative_layout1"
                     android:layout_alignRight="@id/relative_layout1"
-                    android:layout_marginRight="0dp"
                     android:background="@drawable/item_count"
                     android:inputType="numberSigned"
                     android:text="0"
@@ -79,7 +100,7 @@
                         android:id="@+id/grenadeCircle"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:layout_marginLeft="50dp"
+                        android:layout_marginLeft="30dp"
                         android:layout_marginTop="16dp"
                         android:innerRadius="0dp"
                         android:shape="ring"
@@ -109,24 +130,57 @@
 
         </LinearLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp">
+        <zn2.ft.aj.cheepot.ButtonFont
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Créer une cagnotte"
+            android:textSize="20dp"
+            android:layout_marginTop="12dp"
+            />
 
-            <TextView
-                android:id="@+id/profilName"
-                android:layout_width="350dp"
-                android:layout_height="107dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="8dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.506"
-                app:layout_constraintStart_toStartOf="parent" />
+        <zn2.ft.aj.cheepot.ButtonFont
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="20dp"
+            android:text="Mes cagnottes" />
+
+        <zn2.ft.aj.cheepot.ButtonFont
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="20dp"
+            android:text="Favoris" />
+
+        <zn2.ft.aj.cheepot.ButtonFont
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="20dp"
+            android:text="FeedBack" />
+
+        <RelativeLayout
+            android:id="@+id/layout_button_chercher"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/relative_layout3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <zn2.ft.aj.cheepot.ButtonFont
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Chercher"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignBottom="@id/relative_layout3"
+                android:layout_alignRight="@id/relative_layout3"
+                android:layout_marginRight="30dp"
+                android:layout_marginVertical="3dp"
+                android:background="@drawable/ic_search" />
         </RelativeLayout>
     </LinearLayout>
 
