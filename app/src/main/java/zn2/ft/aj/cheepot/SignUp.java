@@ -139,7 +139,7 @@ public class SignUp extends Activity implements OnClickListener {
                             currentUserDb.child("name").setValue(name);
                             currentUserDb.child("family name").setValue(familyName);
                             currentUserDb.child("dateDeNaissance").setValue(dateDeNaissance.getText().toString());
-                            currentUserDb.child("password").setValue(MD5.crypt(password));
+                           // currentUserDb.child("password").setValue(MD5.crypt(password));
                             //currentUserDb.setValue(user);
                             Intent homeIntent = new Intent(SignUp.this, MainActivity.class);
                             startActivity(homeIntent);
