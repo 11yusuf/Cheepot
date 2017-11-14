@@ -10,7 +10,7 @@ public class User {
     public String birthDate;
     public String password;
 
-    public User(String name, String familyName, String birthDate, String password){
+    public User(String name, String familyName, String birthDate, String passwor){
         this.name = name;
         this.familyName = familyName;
         this.birthDate = birthDate;

@@ -54,7 +54,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private void userLogin(){
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
-
+        try {
+            password = MD5.crypt(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erreur de sécurité, Réessayer", Toast.LENGTH_SHORT).show();
+        }
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Entrez votre email SVP", Toast.LENGTH_SHORT).show();
             return;
@@ -78,6 +83,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                             goToProfil.putExtra("IdProfil",user.getUid());
                             startActivity(goToProfil);
                             finish();
+                        }else {
+                            Toast.makeText(LoginActivity.this, "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -94,9 +101,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             // will open mot de passe recovery
         }
         if (view == textViewCreerCompte) {
-            nextIntent = new Intent(LoginActivity.this, SignUp.class);
-            finish();
+            nextIntent = new Intent(LoginActivity.this, SignUpActivity.class);
             startActivity(nextIntent);
+            finish();
         }
         if (view == textViewIci) {
             // sign up partenaire

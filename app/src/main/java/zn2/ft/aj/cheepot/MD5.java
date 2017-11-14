@@ -1,40 +1,21 @@
 package zn2.ft.aj.cheepot;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by yusuf on 13/11/2017.
- */
-
-public class MD5 {
-
-    private static MessageDigest digester;
-
-    static {
-        try {
-            digester = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+public class MD5
+{
+    public static String crypt(String password)throws Exception
+    {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(password.getBytes());
+        byte byteData[] = md.digest();
+        //convert the byte to hex format method 1
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+         sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
         }
+        return sb.toString();
     }
 
-    public static String crypt(String str) {
-        if (str == null || str.length() == 0) {
-            throw new IllegalArgumentException("String to encript cannot be null or zero length");
-        }
-
-        digester.update(str.getBytes());
-        byte[] hash = digester.digest();
-        StringBuffer hexString = new StringBuffer();
-        for (int i = 0; i < hash.length; i++) {
-            if ((0xff & hash[i]) < 0x10) {
-                hexString.append("0" + Integer.toHexString((0xFF & hash[i])));
-            } else {
-                hexString.append(Integer.toHexString(0xFF & hash[i]));
-            }
-        }
-        return hexString.toString();
-    }
 }
 
