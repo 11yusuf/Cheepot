@@ -2,6 +2,7 @@ package zn2.ft.aj.cheepot;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,13 +12,18 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +32,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import static android.app.DatePickerDialog.*;
 import static android.graphics.Color.TRANSPARENT;
@@ -51,9 +63,15 @@ public class SignUpActivity extends Activity implements OnClickListener {
     private int year;
     private int month;
     private int day;
+    Spinner spinner;
+    ArrayAdapter<CharSequence> adapter;
+    private int gender;
+    private TextView textViewConditions;
+    Dialog dialog;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_sign_up);
@@ -71,9 +89,71 @@ public class SignUpActivity extends Activity implements OnClickListener {
             }
         };
 
+        spinner = (Spinner) findViewById(R.id.spinner);
+        String[] plants = new String[]{
+                "Sexe",
+                "Homme",
+                "Femme"
+
+        };
+
+        final List<String> plantsList = new ArrayList<>(Arrays.asList(plants));
+
+        // Initializing an ArrayAdapter
+        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
+                this, R.layout.spinner_item, plantsList) {
+            @Override
+            public boolean isEnabled(int position) {
+                if (position == 0) {
+                    // Disable the first item from Spinner
+                    // First item will be use for hint
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView,
+                                        ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if (position == 0) {
+                    // Set the hint text color gray
+                    tv.setTextColor(Color.GRAY);
+                } else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        };
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner.setAdapter(spinnerArrayAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItemText = (String) parent.getItemAtPosition(position);
+                // If user change the default selection
+                // First item is disable and it is used for hint
+                gender = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        
+
+
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
         editRePassword = (EditText) findViewById(R.id.editRePassword);
+
+        textViewConditions = (TextView) findViewById(R.id.textViewConditions);
+        textViewConditions.setOnClickListener(this);
+
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
         buttonRegister.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
@@ -104,11 +184,21 @@ public class SignUpActivity extends Activity implements OnClickListener {
 
         } else if (view == buttonRegister) {
             registerUser();
+        } else if (view == textViewConditions) {
+
+            termsDialg();
+
         } else if (view == textViewSignin) {
             Intent goToLogin = new Intent(SignUpActivity.this, LoginActivity.class);
             startActivity(goToLogin);
             finish();
         }
+    }
+
+    private void termsDialg() {
+        dialog = new Dialog(SignUpActivity.this);
+        dialog.setContentView(R.layout.dialog_terms);
+        dialog.show();
     }
 
     private void registerUser() {
@@ -143,6 +233,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
                             Intent homeIntent = new Intent(SignUpActivity.this, MainActivity.class);
                             startActivity(homeIntent);
                             finish();
+
                         } else {
                             Toast.makeText(SignUpActivity.this, "Vous etes déjà inscrit", Toast.LENGTH_SHORT).show();
                         }
@@ -169,7 +260,10 @@ public class SignUpActivity extends Activity implements OnClickListener {
             Toast.makeText(this, "Entrez votre prenom SVP", Toast.LENGTH_SHORT).show();
             return false;
         }
-
+        if (gender==0){
+            Toast.makeText(this, "Précisez votre sexe", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if (year == 0) {
             Toast.makeText(this, "Entrez votre date de naissance SVP", Toast.LENGTH_SHORT).show();
             return false;
