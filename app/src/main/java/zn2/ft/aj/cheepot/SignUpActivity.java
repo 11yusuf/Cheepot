@@ -67,7 +67,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
     ArrayAdapter<CharSequence> adapter;
     private int gender;
     private TextView textViewConditions;
-    private  String[] plants = new String[]{
+    private String[] plants = new String[]{
             "Sexe",
             "Homme",
             "Femme"
@@ -91,8 +91,11 @@ public class SignUpActivity extends Activity implements OnClickListener {
         calendar.setOnClickListener(this);
         DateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                dateDeNaissance.setText(String.format("Date de naissance: %d/%d/%d", day, month, year));
+            public void onDateSet(DatePicker datePicker, int yy, int mm, int dd) {
+                dateDeNaissance.setText(String.format("Date de naissance: %d/%d/%d", dd, mm + 1, yy));
+                year = yy;
+                month = mm + 1;
+                day = dd;
             }
         };
 
@@ -142,7 +145,6 @@ public class SignUpActivity extends Activity implements OnClickListener {
 
             }
         });
-        
 
 
         editEmail = (EditText) findViewById(R.id.editEmail);
@@ -171,9 +173,6 @@ public class SignUpActivity extends Activity implements OnClickListener {
     public void onClick(View view) {
         if (view == calendar) {
             Calendar cal = Calendar.getInstance();
-            year = cal.get(Calendar.YEAR);
-            month = cal.get(Calendar.MONTH);
-            day = cal.get(Calendar.DAY_OF_MONTH);
             DatePickerDialog dialog = new DatePickerDialog(
                     SignUpActivity.this,
                     android.R.style.Theme_DeviceDefault_Dialog_MinWidth, DateSetListener, year, month, day);
@@ -258,7 +257,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
             Toast.makeText(this, "Entrez votre prenom SVP", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (gender==0){
+        if (gender == 0) {
             Toast.makeText(this, "Précisez votre sexe", Toast.LENGTH_SHORT).show();
             return false;
         }
