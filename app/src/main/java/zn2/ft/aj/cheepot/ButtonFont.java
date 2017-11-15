@@ -13,5 +13,6 @@ public class ButtonFont extends android.support.v7.widget.AppCompatButton{
         public ButtonFont(Context context, AttributeSet attrs) {
             super(context, attrs);
             this.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/Alegreya-Regular.otf"));
+            this.getBackground().setAlpha(64);
         }
 }

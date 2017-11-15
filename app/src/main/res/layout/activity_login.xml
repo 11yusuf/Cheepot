@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/test_background"
     tools:context="zn2.ft.aj.cheepot.LoginActivity">
 
     <ScrollView
@@ -50,12 +51,13 @@
                 android:text="Mot de passe oublié ?"
                 android:textAlignment="center" />
 
-            <Button
+            <zn2.ft.aj.cheepot.ButtonFont
                 android:id="@+id/buttonSeConnecter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-                android:text="Se Connecter" />
+                android:text="Se Connecter"
+                />
 
             <LinearLayout
                 android:layout_width="wrap_content"
