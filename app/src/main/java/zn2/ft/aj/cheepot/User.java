@@ -9,12 +9,14 @@ public class User {
     public String familyName;
     public String birthDate;
     public String password;
+    public String gender;
 
-    public User(String name, String familyName, String birthDate, String passwor){
+    public User(String name, String familyName, String birthDate, String password , String gender){
         this.name = name;
         this.familyName = familyName;
         this.birthDate = birthDate;
         this.password = password;
+        this.gender = gender;
     }
     public User(){
     }

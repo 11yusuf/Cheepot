@@ -67,6 +67,12 @@ public class SignUpActivity extends Activity implements OnClickListener {
     ArrayAdapter<CharSequence> adapter;
     private int gender;
     private TextView textViewConditions;
+    private  String[] plants = new String[]{
+            "Sexe",
+            "Homme",
+            "Femme"
+
+    };
     Dialog dialog;
 
 
@@ -79,6 +85,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         editName = (EditText) findViewById(R.id.editName);
         editFamilyName = (EditText) findViewById(R.id.editFamilyName);
+        spinner = (Spinner) findViewById(R.id.spinner);
         dateDeNaissance = (TextView) findViewById(R.id.date);
         calendar = (ImageButton) findViewById(R.id.calendar);
         calendar.setOnClickListener(this);
@@ -89,16 +96,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
             }
         };
 
-        spinner = (Spinner) findViewById(R.id.spinner);
-        String[] plants = new String[]{
-                "Sexe",
-                "Homme",
-                "Femme"
-
-        };
-
         final List<String> plantsList = new ArrayList<>(Arrays.asList(plants));
-
         // Initializing an ArrayAdapter
         final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
                 this, R.layout.spinner_item, plantsList) {
@@ -228,7 +226,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
                             Toast.makeText(SignUpActivity.this, "registered successfully", Toast.LENGTH_SHORT).show();
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("users");
                             DatabaseReference currentUserDb = myRef.child(mAuth.getCurrentUser().getUid());
-                            User user = new User(name, familyName, String.format("%d/%d/%d", day, month, year), password);
+                            User user = new User(name, familyName, String.format("%d/%d/%d", day, month, year), password, plants[gender]);
                             currentUserDb.setValue(user);
                             Intent homeIntent = new Intent(SignUpActivity.this, MainActivity.class);
                             startActivity(homeIntent);
