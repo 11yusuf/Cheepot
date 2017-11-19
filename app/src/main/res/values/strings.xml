@@ -1,6 +1,18 @@
 <resources>
     <string name="app_name">Cheepot</string>
 
+    <string-array name="types_list">
+        <item>Anniversaire</item>
+        <item>Week-end à plusieurs</item>
+        <item>Soirée</item>
+        <item>Projet</item>
+        <item>Mariage</item>
+        <item>Naissance</item>
+        <item>Collocation</item>
+        <item>Remerciments</item>
+        <item>Solidarité</item>
+        <item>Association</item>
+        <item>Autres</item>
+    </string-array>
 
-
-    </resources>
+</resources>

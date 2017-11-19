@@ -80,7 +80,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         if(task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent goToProfil = new Intent(LoginActivity.this, ProfilActivity.class);
-                            goToProfil.putExtra("IdProfil",user.getUid());
                             startActivity(goToProfil);
                             finish();
                         }else {

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_sign5"
     tools:context="zn2.ft.aj.cheepot.SignUpActivity">
 
     <ScrollView
@@ -28,7 +29,8 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:hint="Nom"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textCursorDrawable="@drawable/custom_edit_text_cursor" />
 
             <EditText
                 android:id="@+id/editName"
@@ -39,7 +41,8 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:hint="Prénom"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textCursorDrawable="@drawable/custom_edit_text_cursor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -107,7 +110,8 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:hint="Adresse Mail"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textCursorDrawable="@drawable/custom_edit_text_cursor" />
 
             <EditText
                 android:id="@+id/editPassword"
@@ -118,7 +122,8 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:hint="Mot de passe"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textCursorDrawable="@drawable/custom_edit_text_cursor" />
 
             <EditText
                 android:id="@+id/editRePassword"
@@ -129,7 +134,8 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:hint="Confirmer mot de passe"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textCursorDrawable="@drawable/custom_edit_text_cursor" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -154,7 +160,8 @@
                     android:text="Termes et Conditions"
                     android:textAlignment="center"
                     android:textColor="#FF0000"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    />
 
 
             </LinearLayout>

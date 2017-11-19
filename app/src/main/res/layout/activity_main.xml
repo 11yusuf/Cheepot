@@ -4,17 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/test_background"
+    android:background="@drawable/background"
     tools:context="zn2.ft.aj.cheepot.MainActivity"
     >
-    <zn2.ft.aj.cheepot.TextViewFont
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/cheepot"
-        android:textSize="80dp"
-        android:inputType="text"
-        android:text="Cheepot"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="300dp"
-        />
+
 </android.support.constraint.ConstraintLayout>

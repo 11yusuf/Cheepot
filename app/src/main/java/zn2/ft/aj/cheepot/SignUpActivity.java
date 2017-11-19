@@ -63,15 +63,11 @@ public class SignUpActivity extends Activity implements OnClickListener {
     private int year;
     private int month;
     private int day;
-    Spinner spinner;
-    ArrayAdapter<CharSequence> adapter;
+    private Spinner spinner;
     private int gender;
     private TextView textViewConditions;
     private String[] plants = new String[]{
-            "Sexe",
-            "Homme",
-            "Femme"
-
+            "Sexe", "Homme", "Femme"
     };
     Dialog dialog;
 
@@ -98,6 +94,19 @@ public class SignUpActivity extends Activity implements OnClickListener {
                 day = dd;
             }
         };
+
+        editEmail = (EditText) findViewById(R.id.editEmail);
+        editPassword = (EditText) findViewById(R.id.editPassword);
+        editRePassword = (EditText) findViewById(R.id.editRePassword);
+
+        textViewConditions = (TextView) findViewById(R.id.textViewConditions);
+        textViewConditions.setOnClickListener(this);
+
+        textViewSignin = (TextView) findViewById(R.id.textViewSignin);
+        buttonRegister.setOnClickListener(this);
+        textViewSignin.setOnClickListener(this);
+        progressDialog = new ProgressDialog(this);
+        year = 0;
 
         final List<String> plantsList = new ArrayList<>(Arrays.asList(plants));
         // Initializing an ArrayAdapter
@@ -134,12 +143,8 @@ public class SignUpActivity extends Activity implements OnClickListener {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItemText = (String) parent.getItemAtPosition(position);
-                // If user change the default selection
-                // First item is disable and it is used for hint
                 gender = position;
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -147,18 +152,6 @@ public class SignUpActivity extends Activity implements OnClickListener {
         });
 
 
-        editEmail = (EditText) findViewById(R.id.editEmail);
-        editPassword = (EditText) findViewById(R.id.editPassword);
-        editRePassword = (EditText) findViewById(R.id.editRePassword);
-
-        textViewConditions = (TextView) findViewById(R.id.textViewConditions);
-        textViewConditions.setOnClickListener(this);
-
-        textViewSignin = (TextView) findViewById(R.id.textViewSignin);
-        buttonRegister.setOnClickListener(this);
-        textViewSignin.setOnClickListener(this);
-        progressDialog = new ProgressDialog(this);
-        year = 0;
     }
 /*
     @Override

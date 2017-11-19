@@ -8,4 +8,5 @@
     <color name="black">#000000</color>
     <color name="red">#F20000</color>
     <color name="skin">#f5e6d6</color>
+    <color name="gray">#d03c3c53</color>
 </resources>

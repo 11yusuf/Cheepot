@@ -20,6 +20,7 @@ public class ProfilActivity extends Activity implements View.OnClickListener{
     private ImageView showMoney;
     private Button notificationButton;
     private Button addMoneyButton;
+    private Button createPot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,21 @@ public class ProfilActivity extends Activity implements View.OnClickListener{
         Bundle bundle = getIntent().getExtras();
         String idProfil = bundle.getString("IdProfil");
         profilName.setText(idProfil);
+        createPot = (Button) findViewById(R.id.createPot);
+        createPot.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
+        Intent goTo;
         if (view == profilPicture ){
             Toast.makeText(ProfilActivity.this, "upload photo", Toast.LENGTH_SHORT).show();
         }
+        if (view == createPot ){
+            goTo = new Intent(ProfilActivity.this, CreatePotActivity.class);
+            startActivity(goTo);
+            finish();
+        }
+
     }
 }
