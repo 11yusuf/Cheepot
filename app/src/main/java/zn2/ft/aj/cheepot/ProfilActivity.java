@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfilActivity extends Activity implements View.OnClickListener{
@@ -21,21 +24,23 @@ public class ProfilActivity extends Activity implements View.OnClickListener{
     private Button notificationButton;
     private Button addMoneyButton;
     private Button createPot;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_profil);
+
         profilName = (TextView) findViewById(R.id.profilName);
         profilPicture = (CircleImageView) findViewById(R.id.profile_image);
         addMoneyButton = (Button) findViewById(R.id.addMoneyButton);
         notificationButton = (Button) findViewById(R.id.buttonNotification);
-        Bundle bundle = getIntent().getExtras();
-        String idProfil = bundle.getString("IdProfil");
-        profilName.setText(idProfil);
+       // profilName.setText();
         createPot = (Button) findViewById(R.id.createPot);
         createPot.setOnClickListener(this);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
     }
 
     @Override
@@ -44,11 +49,12 @@ public class ProfilActivity extends Activity implements View.OnClickListener{
         if (view == profilPicture ){
             Toast.makeText(ProfilActivity.this, "upload photo", Toast.LENGTH_SHORT).show();
         }
+        /*
         if (view == createPot ){
             goTo = new Intent(ProfilActivity.this, CreatePotActivity.class);
             startActivity(goTo);
             finish();
-        }
+        }*/
 
     }
 }

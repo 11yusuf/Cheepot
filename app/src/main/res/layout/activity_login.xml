@@ -83,7 +83,8 @@
                     android:layout_gravity="right"
                     android:layout_marginLeft="8dp"
                     android:text="Créez compte"
-                    android:textAlignment="gravity" />
+                    android:textAlignment="gravity"
+                    />
             </LinearLayout>
 
             <LinearLayout

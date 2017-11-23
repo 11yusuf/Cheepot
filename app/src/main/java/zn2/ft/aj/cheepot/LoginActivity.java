@@ -3,6 +3,7 @@ package zn2.ft.aj.cheepot;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -49,7 +50,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         textViewCreerCompte.setOnClickListener(this);
         textViewIci.setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
-
+        textViewCreerCompte.setPaintFlags( textViewCreerCompte.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        textViewIci.setPaintFlags( textViewIci.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
     private void userLogin(){
         String email = editEmail.getText().toString().trim();
