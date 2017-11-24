@@ -40,7 +40,6 @@ public class ProfilActivity extends Activity implements View.OnClickListener{
         createPot = (Button) findViewById(R.id.createPot);
         createPot.setOnClickListener(this);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
     }
 
     @Override
@@ -49,12 +48,12 @@ public class ProfilActivity extends Activity implements View.OnClickListener{
         if (view == profilPicture ){
             Toast.makeText(ProfilActivity.this, "upload photo", Toast.LENGTH_SHORT).show();
         }
-        /*
+
         if (view == createPot ){
             goTo = new Intent(ProfilActivity.this, CreatePotActivity.class);
             startActivity(goTo);
             finish();
-        }*/
+        }
 
     }
 }

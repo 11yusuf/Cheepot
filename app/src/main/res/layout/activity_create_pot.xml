@@ -6,11 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreatePotActivity">
+<android.support.v7.widget.CardView
+    android:id="@+id/potBackground"
+    android:background="@drawable/background_sign2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:id="@+id/photoTest"
 
+        />
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="344dp"
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="81dp" />
+</android.support.v7.widget.CardView>
+
 </android.support.constraint.ConstraintLayout>

@@ -23,7 +23,7 @@
             android:name=".SignUpActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".ProfilActivity" />
-        <activity android:name=".CreatePotActivity" />
+        <activity android:name=".CreatePotActivity"></activity>
         <activity android:name=".FavoritePotsActivity" />
         <activity android:name=".FeedbackActivity"></activity>
     </application>
