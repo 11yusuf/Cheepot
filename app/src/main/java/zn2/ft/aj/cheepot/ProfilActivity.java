@@ -29,7 +29,7 @@ public class ProfilActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //  requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_profil);
 
         profilName = (TextView) findViewById(R.id.profilName);
@@ -53,6 +53,8 @@ public class ProfilActivity extends Activity implements View.OnClickListener{
             goTo = new Intent(ProfilActivity.this, CreatePotActivity.class);
             startActivity(goTo);
             finish();
+        }
+        if (view == notificationButton){
         }
 
     }

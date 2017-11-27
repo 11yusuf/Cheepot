@@ -6,23 +6,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreatePotActivity">
-<android.support.v7.widget.CardView
-    android:id="@+id/potBackground"
-    android:background="@drawable/background_sign2"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="400dp"
-        android:id="@+id/photoTest"
 
-        />
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="344dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="81dp" />
-</android.support.v7.widget.CardView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <android.support.v7.widget.CardView
+            android:id="@+id/potBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/photoTest"
+                android:layout_width="fill_parent"
+                android:layout_height="300dp"
+
+                />
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            >
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="280dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="80dp" />
+        </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/potBackground"
+            >
+            <EditText
+                android:id="@+id/potDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description..."
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="25dp"
+                android:textCursorDrawable="@drawable/custom_edit_text_cursor"
+                />
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,65 +33,68 @@ public class CreatePotActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_create_pot);
-        potBackground = (CardView)findViewById(R.id.potBackground);
+        potBackground = (CardView) findViewById(R.id.potBackground);
         spinner = (Spinner) findViewById(R.id.spinner);
         photoTest = (ImageView) findViewById(R.id.photoTest);
+
         final List<String> typesList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.types_list)));
-        // Initializing an ArrayAdapter
-        final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.spinner_item, typesList) {
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                tv.setTextColor(Color.BLACK);
-                return view;
-            }
-        };
-        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
-        spinner.setAdapter(spinnerArrayAdapter);
-
+        List<PotType> types = new ArrayList<PotType>(12);
+        for (int i = 0; i < 12; i++) {
+            types.add(new PotType((String) typesList.get(i), getResources().getIdentifier("image" + i, "drawable", getPackageName())));
+        }
+        spinner.setAdapter(new PotTypeSpinnerAdapter(this, types));
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                Toast.makeText(adapterView.getContext(), ((PotType) adapterView.getItemAtPosition(position)).getName(), Toast.LENGTH_SHORT).show();
                 selectedItem = position;
                 changeBackground(position);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //nothing
             }
         });
     }
 
     private void changeBackground(int position) {
-        switch (position){
-            case 0: photoTest.setImageResource(R.drawable.background_sign2); //Aniversaire
+        switch (position) {
+            case 0:
+                photoTest.setImageResource(R.drawable.background_sign2); //Aniversaire
                 break;
-            case 1:  photoTest.setImageResource(R.drawable.background_sign); //Weekèend à plusieurs
+            case 1:
+                photoTest.setImageResource(R.drawable.background_sign); //Weekèend à plusieurs
                 break;
-            case 2:  photoTest.setImageResource(R.drawable.background_sign3); //Soirée
+            case 2:
+                photoTest.setImageResource(R.drawable.background_sign3); //Soirée
                 break;
-            case 3:  photoTest.setImageResource(R.drawable.background_sign4); //Projet
+            case 3:
+                photoTest.setImageResource(R.drawable.background_sign4); //Projet
                 break;
-            case 4:  photoTest.setImageResource(R.drawable.background_sign5); //Mariage
+            case 4:
+                photoTest.setImageResource(R.drawable.background_sign5); //Mariage
                 break;
-            case 5:  photoTest.setImageResource(R.drawable.backgroundtwo); //Naissance
+            case 5:
+                photoTest.setImageResource(R.drawable.backgroundtwo); //Naissance
                 break;
-            case 6:  photoTest.setImageResource(R.drawable.background); //Collocation
+            case 6:
+                photoTest.setImageResource(R.drawable.background); //Collocation
                 break;
-            case 7:  photoTest.setImageResource(R.drawable.background_sign2); //Remerciments
+            case 7:
+                photoTest.setImageResource(R.drawable.background_sign2); //Remerciments
                 break;
-            case 8:  photoTest.setImageResource(R.drawable.ic_grenade); //Solidarité
+            case 8:
+                photoTest.setImageResource(R.drawable.ic_grenade); //Solidarité
                 break;
-            case 9:  photoTest.setImageResource(R.drawable.background_sign); //Association
+            case 9:
+                photoTest.setImageResource(R.drawable.background_sign); //Association
                 break;
-            case 10: photoTest.setImageResource(R.drawable.background_sign3); //Autres
+            case 10:
+                photoTest.setImageResource(R.drawable.background_sign3); //Autres
                 break;
-            default: break;
+            default:
+                break;
         }
         photoTest.setScaleType(ImageView.ScaleType.FIT_XY);
     }

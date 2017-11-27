@@ -9,13 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:windowSoftInputMode="adjustNothing" />
@@ -23,9 +17,16 @@
             android:name=".SignUpActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".ProfilActivity" />
-        <activity android:name=".CreatePotActivity"></activity>
+        <activity android:name=".CreatePotActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".FavoritePotsActivity" />
-        <activity android:name=".FeedbackActivity"></activity>
+        <activity android:name=".FeedbackActivity" />
+        <activity android:name=".PotProfilActivity" />
     </application>
 
 </manifest>
