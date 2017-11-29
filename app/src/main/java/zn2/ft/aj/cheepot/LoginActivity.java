@@ -21,6 +21,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import zn2.ft.aj.cheepot.data.MD5;
+
 public class LoginActivity extends Activity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;

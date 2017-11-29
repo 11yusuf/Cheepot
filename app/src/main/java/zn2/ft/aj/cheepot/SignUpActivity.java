@@ -41,8 +41,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+
+import zn2.ft.aj.cheepot.data.MD5;
+import zn2.ft.aj.cheepot.data.User;
 
 import static android.app.DatePickerDialog.*;
 import static android.graphics.Color.TRANSPARENT;
@@ -212,7 +214,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
                             DatabaseReference currentUserDb = myRef.child(mAuth.getCurrentUser().getUid());
                             User user = new User(name, familyName, String.format("%d/%d/%d", day, month, year), password, plants[gender]);
                             currentUserDb.setValue(user);
-                            Intent homeIntent = new Intent(SignUpActivity.this, MainActivity.class);
+                            Intent homeIntent = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(homeIntent);
                             finish();
 

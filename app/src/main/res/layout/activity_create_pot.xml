@@ -27,12 +27,12 @@
             android:layout_width="300dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:background="@color/white"
+            android:background="@color/kaki"
             >
 
             <Spinner
                 android:id="@+id/spinner"
-                android:layout_width="280dp"
+                android:layout_width="match_parent"
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 tools:layout_editor_absoluteX="8dp"

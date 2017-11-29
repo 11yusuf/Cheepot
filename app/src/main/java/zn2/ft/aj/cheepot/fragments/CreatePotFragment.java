@@ -1,51 +1,66 @@
-package zn2.ft.aj.cheepot;
+package zn2.ft.aj.cheepot.fragments;
 
-import android.app.Activity;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import zn2.ft.aj.cheepot.CreatePotActivity;
+import zn2.ft.aj.cheepot.HomeActivity;
+import zn2.ft.aj.cheepot.PotProfilActivity;
+import zn2.ft.aj.cheepot.ProfilActivity;
+import zn2.ft.aj.cheepot.R;
 import zn2.ft.aj.cheepot.adpater.PotType;
 import zn2.ft.aj.cheepot.adpater.PotTypeSpinnerAdapter;
 
-public class CreatePotActivity extends Activity {
+
+public class CreatePotFragment extends Fragment implements View.OnClickListener{
+
     private EditText nomPot;
     private EditText description;
     private Spinner spinner;
     private int selectedItem;
     private CardView potBackground;
     private ImageView photoTest;
+    private Button createPotButton;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-      /*  requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_create_pot);
-        potBackground = (CardView) findViewById(R.id.potBackground);
-        spinner = (Spinner) findViewById(R.id.spinner);
-        photoTest = (ImageView) findViewById(R.id.photoTest);
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_create_pot, container, false);
+        potBackground = (CardView) view.findViewById(R.id.potBackground);
+        spinner = (Spinner) view.findViewById(R.id.spinner);
+        photoTest = (ImageView) view.findViewById(R.id.photoTest);
+        createPotButton = (Button) view.findViewById(R.id.createPotButton);
+        createPotButton.setOnClickListener(this);
         final List<String> typesList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.types_list)));
         List<PotType> types = new ArrayList<PotType>(12);
         for (int i = 0; i < 12; i++) {
-            types.add(new PotType((String) typesList.get(i), getResources().getIdentifier("image" + i, "drawable", getPackageName())));
+            types.add(new PotType((String) typesList.get(i), getResources().getIdentifier("image" + i, "drawable", getActivity().getPackageName())));
         }
-        spinner.setAdapter(new PotTypeSpinnerAdapter(this, types));
+        spinner.setAdapter(new PotTypeSpinnerAdapter(getActivity(), types));
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
@@ -58,7 +73,8 @@ public class CreatePotActivity extends Activity {
             public void onNothingSelected(AdapterView<?> adapterView) {
                 //nothing
             }
-        });*/
+        });
+        return view;
     }
 
     private void changeBackground(int position) {
@@ -76,7 +92,7 @@ public class CreatePotActivity extends Activity {
                 photoTest.setImageResource(R.drawable.background_sign3); //Voyage
                 break;
             case 4:
-                photoTest.setImageResource(R.drawable.background_sign4); //Projet
+                photoTest.setImageResource(R.drawable.projet); //Projet
                 break;
             case 5:
                 photoTest.setImageResource(R.drawable.background_sign5); //Mariage
@@ -85,7 +101,7 @@ public class CreatePotActivity extends Activity {
                 photoTest.setImageResource(R.drawable.naissance); //Naissance
                 break;
             case 7:
-                photoTest.setImageResource(R.drawable.background); //Collocation
+                photoTest.setImageResource(R.drawable.collocation); //Collocation
                 break;
             case 8:
                 photoTest.setImageResource(R.drawable.background_sign2); //Remerciments
@@ -105,4 +121,41 @@ public class CreatePotActivity extends Activity {
         photoTest.setScaleType(ImageView.ScaleType.FIT_XY);
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v == createPotButton){
+                //STORE DATA
+                Intent goTo;
+                goTo = new Intent(v.getContext(), PotProfilActivity.class);
+                startActivity(goTo);
+                getActivity().finish();
+        }
+
+    }
 }
+/*
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+     //   Toast.makeText(getActivity(), "Entrez votre email SVP", Toast.LENGTH_SHORT).show();
+
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
+    }
+*/
+
