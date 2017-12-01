@@ -46,9 +46,9 @@ public class HomeActivity extends AppCompatActivity
 
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu_send);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu_camera);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu_gallery);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites_colored);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -59,21 +59,21 @@ public class HomeActivity extends AppCompatActivity
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0: {
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu_share);
-                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu_gallery);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu_gallery);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites_colored);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
                         break;
                     }
                     case 1: {
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu_send);
-                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu_send);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu_gallery);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate_colored);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
                         break;
                     }
                     case 2: {
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_menu_send);
-                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_menu_manage);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_menu_gallery);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte_colored);
                         break;
                     }
                 }
