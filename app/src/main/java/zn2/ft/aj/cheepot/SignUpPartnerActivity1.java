@@ -44,6 +44,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import zn2.ft.aj.cheepot.data.Partner;
+
 import static android.app.DatePickerDialog.*;
 import static android.graphics.Color.TRANSPARENT;
 
@@ -146,6 +148,7 @@ public class SignUpPartnerActivity1 extends Activity implements OnClickListener 
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 gender = position;
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -187,11 +190,17 @@ public class SignUpPartnerActivity1 extends Activity implements OnClickListener 
 
         if (view == buttonSuivant) {
             // sign up partenaire
-            if (validSuivant()){
-            nextIntent = new Intent(SignUpPartnerActivity1.this, SignUpPartnerActivity2.class);
-            startActivity(nextIntent);
-            finish();}
-    }}
+            if (validSuivant()) {
+                Partner partner = new Partner();
+                nextIntent = new Intent(SignUpPartnerActivity1.this, SignUpPartnerActivity2.class);
+                nextIntent.putExtra("partner", partner);
+                nextIntent.putExtra("email",editEmail.getText().toString());
+                nextIntent.putExtra("password",editPassword.getText().toString());
+                startActivity(nextIntent);
+                finish();
+            }
+        }
+    }
 
     private void termsDialg() {
         dialog = new Dialog(SignUpPartnerActivity1.this);
