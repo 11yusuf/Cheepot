@@ -5,21 +5,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/consult_account"
+            android:icon="@drawable/ic_grenade"
+            android:title="Consulter Compte" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/add_money"
+            android:icon="@drawable/ic_plus"
+            android:title="Changer Compte" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/change_password"
+            android:icon="@drawable/ic_charger_compte"
+            android:title="changer mot de passe" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/logOut"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Se déconnecter" />
     </group>
 
     <item android:title="Communicate">
