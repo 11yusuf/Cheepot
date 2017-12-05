@@ -47,11 +47,11 @@ public class HomeActivity extends AppCompatActivity
 
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites_colored);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_add_colored);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
-        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
-        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_star);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_bell);
+        tabLayout.getTabAt(4).setIcon(R.drawable.ic_find);
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -62,43 +62,43 @@ public class HomeActivity extends AppCompatActivity
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0: {
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites_colored);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_add_colored);
                         tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
-                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
-                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_star);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_bell);
+                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_find);
                         break;
                     }
                     case 1: {
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_add);
                         tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate_colored);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
-                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
-                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_star);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_bell);
+                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_find);
                         break;
                     }
                     case 2: {
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_add);
                         tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte_colored);
-                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
-                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_star_colored);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_bell);
+                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_find);
                         break;
                     }
                     case 3:{
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_add);
                         tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
-                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
-                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_star);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_bell_colored);
+                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_find);
                         break;
                     }
                     case 4: {
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_add);
                         tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
-                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
-                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_star);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_bell);
+                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_find_colored);
                         break;
                     }
                 }
