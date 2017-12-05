@@ -145,7 +145,7 @@
 
             >
 
-            <zn2.ft.aj.cheepot.ButtonFont
+            <zn2.ft.aj.cheepot.adpater.ButtonFont
                 android:id="@+id/createPot"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -154,7 +154,7 @@
                 android:text="Créer une cagnotte"
                 android:textSize="20dp" />
 
-            <zn2.ft.aj.cheepot.ButtonFont
+            <zn2.ft.aj.cheepot.adpater.ButtonFont
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -162,7 +162,7 @@
                 android:text="Mes cagnottes"
                 android:textSize="20dp" />
 
-            <zn2.ft.aj.cheepot.ButtonFont
+            <zn2.ft.aj.cheepot.adpater.ButtonFont
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -170,7 +170,7 @@
                 android:text="Favoris"
                 android:textSize="20dp" />
 
-            <zn2.ft.aj.cheepot.ButtonFont
+            <zn2.ft.aj.cheepot.adpater.ButtonFont
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -189,7 +189,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
 
-                    <zn2.ft.aj.cheepot.ButtonFont
+                    <zn2.ft.aj.cheepot.adpater.ButtonFont
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/white"
