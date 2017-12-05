@@ -49,6 +49,8 @@ public class HomeActivity extends AppCompatActivity
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites_colored);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
+        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -62,18 +64,40 @@ public class HomeActivity extends AppCompatActivity
                         tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites_colored);
                         tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
                         tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
+                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
                         break;
                     }
                     case 1: {
                         tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites);
                         tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate_colored);
                         tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
+                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
                         break;
                     }
                     case 2: {
                         tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites);
                         tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
                         tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte_colored);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
+                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
+                        break;
+                    }
+                    case 3:{
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
+                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
+                        break;
+                    }
+                    case 4: {
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_favorites);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_charger_compte);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_calendar);
+                        tabLayout.getTabAt(4).setIcon(R.drawable.ic_girl);
                         break;
                     }
                 }
@@ -144,9 +168,11 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        adapter.addFragment(new FavoritePotsFragment(), "FavoritePots");
         adapter.addFragment(new CreatePotFragment(), "haha2");
+        adapter.addFragment(new FavoritePotsFragment(), "FavoritePots");
         adapter.addFragment( new FavoritePotsFragment(), "haha1");
+        adapter.addFragment(new FavoritePotsFragment(), "haha3");
+        adapter.addFragment(new FavoritePotsFragment(), "haha4");
         viewPager.setAdapter(adapter);
     }
 
