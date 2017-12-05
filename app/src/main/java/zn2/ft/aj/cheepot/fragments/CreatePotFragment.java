@@ -17,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,10 +32,13 @@ import zn2.ft.aj.cheepot.ProfilActivity;
 import zn2.ft.aj.cheepot.R;
 import zn2.ft.aj.cheepot.adpater.PotType;
 import zn2.ft.aj.cheepot.adpater.PotTypeSpinnerAdapter;
+import zn2.ft.aj.cheepot.data.Pot;
+import zn2.ft.aj.cheepot.data.User;
 
 
 public class CreatePotFragment extends Fragment implements View.OnClickListener{
 
+    private FirebaseAuth mAuth;
     private EditText nomPot;
     private EditText description;
     private Spinner spinner;
@@ -39,12 +46,7 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
     private CardView potBackground;
     private ImageView photoTest;
     private Button createPotButton;
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
+    private Pot potCreated;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -125,6 +127,9 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if(v == createPotButton){
                 //STORE DATA
+                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("users");
+                DatabaseReference currentUserDb = myRef.child(mAuth.getCurrentUser().getUid()).child("createdPots");
+                currentUserDb.setValue(potCreated);
                 Intent goTo;
                 goTo = new Intent(v.getContext(), PotProfilActivity.class);
                 startActivity(goTo);
@@ -133,29 +138,3 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
 
     }
 }
-/*
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-     //   Toast.makeText(getActivity(), "Entrez votre email SVP", Toast.LENGTH_SHORT).show();
-
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
-*/
-

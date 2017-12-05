@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundtwo"
-    tools:context="zn2.ft.aj.cheepot.LoginActivity">
+    tools:context=".LoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                 android:text="Mot de passe oublié ?"
                 android:textAlignment="center" />
 
-            <zn2.ft.aj.cheepot.ButtonFont
+            <zn2.ft.aj.cheepot.adpater.ButtonFont
                 android:id="@+id/buttonSeConnecter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
