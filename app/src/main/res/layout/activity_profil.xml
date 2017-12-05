@@ -75,7 +75,7 @@
                         android:layout_height="45dip"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
-                        android:background="@drawable/ic_notification" />
+                        android:background="@drawable/ic_bell_colored" />
                 </RelativeLayout>
 
                 <TextView
