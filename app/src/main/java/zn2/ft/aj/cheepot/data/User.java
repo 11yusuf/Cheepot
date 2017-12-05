@@ -22,8 +22,6 @@ public class User {
     }
 
     public User() {
-    }
-    public String getString(){
-        return name +"ok bb"+ familyName;
+
     }
 }

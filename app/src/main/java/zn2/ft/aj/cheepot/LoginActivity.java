@@ -82,7 +82,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent goToProfil = new Intent(LoginActivity.this, ProfilActivity.class);
+                            Intent goToProfil = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(goToProfil);
                             finish();
                         }else {
@@ -109,6 +109,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         }
         if (view == textViewIci) {
             // sign up partenaire
+            nextIntent = new Intent(LoginActivity.this, SignUpPartnerActivity1.class);
+            startActivity(nextIntent);
+            finish();
         }
     }
 }

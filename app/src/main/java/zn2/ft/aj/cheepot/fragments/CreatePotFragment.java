@@ -127,9 +127,11 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if(v == createPotButton){
                 //STORE DATA
-                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("users");
-                DatabaseReference currentUserDb = myRef.child(mAuth.getCurrentUser().getUid()).child("createdPots");
-                currentUserDb.setValue(potCreated);
+                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference currentUserDb = myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("createdPots");
+             //   DatabaseReference potsDb = myRef.child("pots").child().child("createdPots");
+
+            currentUserDb.setValue(potCreated);
                 Intent goTo;
                 goTo = new Intent(v.getContext(), PotProfilActivity.class);
                 startActivity(goTo);
