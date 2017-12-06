@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -59,12 +59,13 @@ public class HomeActivity extends AppCompatActivity
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
 
-        //get datafrom firebase
+        //get userInfo from firebase
+        databaseReference = FirebaseDatabase.getInstance().getReference("users");
         databaseReference.child(mAuth.getCurrentUser().getUid()).child("userInfo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                Toast.makeText(getApplicationContext(), user.getString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), user.name + "  " + user.familyName, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -152,7 +153,6 @@ public class HomeActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -176,11 +176,11 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setupViewPager(ViewPager viewPager) {
+        adapter.addFragment(new FavoritePotsFragment(), "FavoritePots");
         adapter.addFragment(new CreatePotFragment(), "haha2");
         adapter.addFragment(new FavoritePotsFragment(), "FavoritePots");
         adapter.addFragment( new FavoritePotsFragment(), "haha1");
         adapter.addFragment(new FavoritePotsFragment(), "haha3");
-        adapter.addFragment(new FavoritePotsFragment(), "haha4");
         viewPager.setAdapter(adapter);
     }
 

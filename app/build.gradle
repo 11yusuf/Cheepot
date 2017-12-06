@@ -37,6 +37,12 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile 'com.github.varunest:sparkbutton:1.0.5'
+}
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
 }
 
 

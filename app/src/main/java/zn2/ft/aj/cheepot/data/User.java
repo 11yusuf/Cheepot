@@ -20,10 +20,6 @@ public class User {
         this.gender = gender;
         this.money = money;
     }
-
-    public User() {
-    }
-    public String getString(){
-        return name +"ok bb"+ familyName;
+    public User(){
     }
 }

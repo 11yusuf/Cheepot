@@ -7,8 +7,14 @@
     tools:context=".PotProfilActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.CardView
             android:id="@+id/potBackground"
@@ -16,15 +22,18 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/photoTest"
+                android:id="@+id/potProfilPhoto"
                 android:layout_width="fill_parent"
-                android:layout_height="300dp" />
+                android:layout_height="300dp"
+                android:src="@drawable/background_sign"
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:id="@+id/potName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="PotName" />
+                android:layout_gravity="center_horizontal"
+                android:text="haha" />
 
             <TextView
                 android:id="@+id/moneyInPot"
@@ -32,6 +41,22 @@
                 android:layout_height="wrap_content"
                 android:hint="moneyInpot" />
         </android.support.v7.widget.CardView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+            <com.varunest.sparkbutton.SparkButton
+                android:id="@+id/spark_button"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:sparkbutton_activeImage="@drawable/ic_pomegranate_colored"
+                app:sparkbutton_iconSize="40dp"
+                app:sparkbutton_inActiveImage="@drawable/ic_pomegranate"
+                app:sparkbutton_primaryColor="@color/red"
+                app:sparkbutton_secondaryColor="@color/drakBleu" />
+        </RelativeLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
