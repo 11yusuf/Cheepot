@@ -59,7 +59,7 @@ public class HomeActivity extends AppCompatActivity
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
 
-        //get datafrom firebase
+        //get userInfo from firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         databaseReference.child(mAuth.getCurrentUser().getUid()).child("userInfo").addValueEventListener(new ValueEventListener() {
             @Override
@@ -153,7 +153,6 @@ public class HomeActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -177,11 +176,11 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setupViewPager(ViewPager viewPager) {
+        adapter.addFragment(new FavoritePotsFragment(), "FavoritePots");
         adapter.addFragment(new CreatePotFragment(), "haha2");
         adapter.addFragment(new FavoritePotsFragment(), "FavoritePots");
         adapter.addFragment( new FavoritePotsFragment(), "haha1");
         adapter.addFragment(new FavoritePotsFragment(), "haha3");
-        adapter.addFragment(new FavoritePotsFragment(), "haha4");
         viewPager.setAdapter(adapter);
     }
 

@@ -54,6 +54,18 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         textViewCreerCompte.setPaintFlags( textViewCreerCompte.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         textViewIci.setPaintFlags( textViewIci.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null){
+            Toast.makeText(LoginActivity.this, "logged in with"+ currentUser.getEmail().toString(), Toast.LENGTH_SHORT).show();
+            Intent goToProfil = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(goToProfil);
+            finish();
+        }
+    }
     private void userLogin(){
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();

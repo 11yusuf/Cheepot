@@ -20,8 +20,6 @@ public class User {
         this.gender = gender;
         this.money = money;
     }
-
-    public User() {
-
+    public User(){
     }
 }

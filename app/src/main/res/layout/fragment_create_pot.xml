@@ -44,7 +44,7 @@
             android:layout_alignBottom="@id/potBackground">
 
             <EditText
-                android:id="@+id/potDescription"
+                android:id="@+id/potName"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginHorizontal="25dp"

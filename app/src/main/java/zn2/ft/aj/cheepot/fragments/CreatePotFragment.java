@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +40,7 @@ import zn2.ft.aj.cheepot.data.User;
 public class CreatePotFragment extends Fragment implements View.OnClickListener{
 
     private FirebaseAuth mAuth;
-    private EditText nomPot;
-    private EditText description;
+    private EditText potName;
     private Spinner spinner;
     private int selectedItem;
     private CardView potBackground;
@@ -51,8 +51,10 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance();
         View view = inflater.inflate(R.layout.fragment_create_pot, container, false);
         potBackground = (CardView) view.findViewById(R.id.potBackground);
+        potName = (EditText)view.findViewById(R.id.potName);
         spinner = (Spinner) view.findViewById(R.id.spinner);
         photoTest = (ImageView) view.findViewById(R.id.photoTest);
         createPotButton = (Button) view.findViewById(R.id.createPotButton);
@@ -66,7 +68,7 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(adapterView.getContext(), ((PotType) adapterView.getItemAtPosition(position)).getName(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(adapterView.getContext(), ((PotType) adapterView.getItemAtPosition(position)).getName(), Toast.LENGTH_SHORT).show();
                 selectedItem = position;
                 changeBackground(position);
             }
@@ -125,18 +127,29 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if(v == createPotButton){
+        if(v == createPotButton && valideCreation()){
                 //STORE DATA
-                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+             /*   DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference currentUserDb = myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("createdPots");
-             //   DatabaseReference potsDb = myRef.child("pots").child().child("createdPots");
-
-            currentUserDb.setValue(potCreated);
+                DatabaseReference potsDb = myRef.child("activePots").push();
+                currentUserDb.setValue(potsDb.getKey());
+                potsDb.setValue(potCreated);
+               */
                 Intent goTo;
                 goTo = new Intent(v.getContext(), PotProfilActivity.class);
+                goTo.putExtra("potCreated", potCreated);
                 startActivity(goTo);
                 getActivity().finish();
         }
 
+    }
+
+    public boolean valideCreation(){
+        if (TextUtils.isEmpty(potName.getText().toString())){
+            Toast.makeText(getActivity(), "Entrez un nom pour la cagnotte", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        potCreated = new Pot(potName.getText().toString(), selectedItem, mAuth.getCurrentUser().getUid().toString());
+        return true;
     }
 }
