@@ -1,8 +1,6 @@
 package zn2.ft.aj.cheepot.fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -19,22 +17,16 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import zn2.ft.aj.cheepot.CreatePotActivity;
-import zn2.ft.aj.cheepot.HomeActivity;
 import zn2.ft.aj.cheepot.PotProfilActivity;
-import zn2.ft.aj.cheepot.ProfilActivity;
 import zn2.ft.aj.cheepot.R;
 import zn2.ft.aj.cheepot.adpater.PotType;
 import zn2.ft.aj.cheepot.adpater.PotTypeSpinnerAdapter;
 import zn2.ft.aj.cheepot.data.Pot;
-import zn2.ft.aj.cheepot.data.User;
 
 
 public class CreatePotFragment extends Fragment implements View.OnClickListener{
@@ -129,7 +121,7 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if(v == createPotButton && valideCreation()){
                 //STORE DATA
-             /*   DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+               /*   DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference currentUserDb = myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("createdPots");
                 DatabaseReference potsDb = myRef.child("activePots").push();
                 currentUserDb.setValue(potsDb.getKey());

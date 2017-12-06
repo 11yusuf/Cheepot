@@ -28,6 +28,9 @@ import zn2.ft.aj.cheepot.adpater.SectionsPageAdapter;
 import zn2.ft.aj.cheepot.data.User;
 import zn2.ft.aj.cheepot.fragments.FavoritePotsFragment;
 import zn2.ft.aj.cheepot.fragments.CreatePotFragment;
+import zn2.ft.aj.cheepot.fragments.MyPotsFragment;
+import zn2.ft.aj.cheepot.fragments.NotificationsFragment;
+import zn2.ft.aj.cheepot.fragments.SearchFragment;
 
 
 public class HomeActivity extends AppCompatActivity
@@ -155,6 +158,7 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Intent nextIntent;
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -171,7 +175,9 @@ public class HomeActivity extends AppCompatActivity
             finish();
 
         } else if (id == R.id.feedback) {
-
+            nextIntent = new Intent(HomeActivity.this, FeedbackActivity.class);
+            startActivity(nextIntent);
+            finish();
         } else if (id == R.id.support) {
 
         }
@@ -183,10 +189,10 @@ public class HomeActivity extends AppCompatActivity
 
     private void setupViewPager(ViewPager viewPager) {
         adapter.addFragment(new CreatePotFragment(), "haha2");
-        adapter.addFragment(new FavoritePotsFragment(), "FavoritePots");
+        adapter.addFragment(new MyPotsFragment(), "FavoritePots");
         adapter.addFragment( new FavoritePotsFragment(), "haha1");
-        adapter.addFragment(new FavoritePotsFragment(), "haha3");
-        adapter.addFragment(new FavoritePotsFragment(), "haha4");
+        adapter.addFragment(new NotificationsFragment(), "haha3");
+        adapter.addFragment(new SearchFragment(), "haha4");
         viewPager.setAdapter(adapter);
     }
 

@@ -33,8 +33,7 @@ public class Pot implements Serializable {
         this.dateCreation = new Date().toString();
         this.creatorUid = creatorUid;
     }
-    public Pot(){
-        this.money = 0;
+    public Pot(){  this.money = 0;
     }
 
     public void addMoney( int money){

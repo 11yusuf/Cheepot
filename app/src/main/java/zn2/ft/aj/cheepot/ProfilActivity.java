@@ -49,11 +49,8 @@ public class ProfilActivity extends Activity implements View.OnClickListener{
             Toast.makeText(ProfilActivity.this, "upload photo", Toast.LENGTH_SHORT).show();
         }
 
-        if (view == createPot ){
-            goTo = new Intent(ProfilActivity.this, CreatePotActivity.class);
-            startActivity(goTo);
-            finish();
-        }
+
+
         if (view == notificationButton){
         }
 
