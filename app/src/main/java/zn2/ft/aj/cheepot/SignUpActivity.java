@@ -211,8 +211,8 @@ public class SignUpActivity extends Activity implements OnClickListener {
                         if (task.isSuccessful()) {
                             Toast.makeText(SignUpActivity.this, "registered successfully", Toast.LENGTH_SHORT).show();
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("users");
-                            DatabaseReference currentUserDb = myRef.child(mAuth.getCurrentUser().getUid());
-                            User user = new User(name, familyName, String.format("%d/%d/%d", day, month, year), password, plants[gender]);
+                            DatabaseReference currentUserDb = myRef.child(mAuth.getCurrentUser().getUid()).child("userInfo");
+                            User user = new User(name, familyName, String.format("%d/%d/%d", day, month, year), password, plants[gender], 0);
                             currentUserDb.setValue(user);
                             Intent homeIntent = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(homeIntent);

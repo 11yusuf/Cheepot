@@ -10,14 +10,20 @@ public class User {
     public String birthDate;
     public String password;
     public String gender;
+    public int money;
 
-    public User(String name, String familyName, String birthDate, String password , String gender){
+    public User(String name, String familyName, String birthDate, String password, String gender, int money) {
         this.name = name;
         this.familyName = familyName;
         this.birthDate = birthDate;
         this.password = password;
         this.gender = gender;
+        this.money = money;
     }
-    public User(){
+
+    public User() {
+    }
+    public String getString(){
+        return name +"ok bb"+ familyName;
     }
 }
