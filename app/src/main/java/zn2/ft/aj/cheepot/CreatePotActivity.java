@@ -67,10 +67,10 @@ public class CreatePotActivity extends Activity {
                 photoTest.setImageResource(R.drawable.anniversaire); //Aniversaire
                 break;
             case 1:
-                photoTest.setImageResource(R.drawable.anniversaire); //Weekèend à plusieurs
+                photoTest.setImageResource(R.drawable.weekend); //Weekèend à plusieurs
                 break;
             case 2:
-                photoTest.setImageResource(R.drawable.background_sign3); //Soirée
+                photoTest.setImageResource(R.drawable.anniversaire); //Soirée
                 break;
             case 3:
                 photoTest.setImageResource(R.drawable.background_sign3); //Voyage

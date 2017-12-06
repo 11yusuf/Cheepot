@@ -87,19 +87,19 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
                 photoTest.setImageResource(R.drawable.anniversaire); //Aniversaire
                 break;
             case 1:
-                photoTest.setImageResource(R.drawable.anniversaire); //Weekèend à plusieurs
+                photoTest.setImageResource(R.drawable.weekend2); //Weekèend à plusieurs
                 break;
             case 2:
-                photoTest.setImageResource(R.drawable.background_sign3); //Soirée
+                photoTest.setImageResource(R.drawable.soiree2); //Soirée
                 break;
             case 3:
-                photoTest.setImageResource(R.drawable.background_sign3); //Voyage
+                photoTest.setImageResource(R.drawable.voyage3); //Voyage
                 break;
             case 4:
                 photoTest.setImageResource(R.drawable.projet); //Projet
                 break;
             case 5:
-                photoTest.setImageResource(R.drawable.background_sign5); //Mariage
+                photoTest.setImageResource(R.drawable.wedding); //Mariage
                 break;
             case 6:
                 photoTest.setImageResource(R.drawable.naissance); //Naissance
@@ -108,16 +108,16 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
                 photoTest.setImageResource(R.drawable.collocation); //Collocation
                 break;
             case 8:
-                photoTest.setImageResource(R.drawable.background_sign2); //Remerciments
+                photoTest.setImageResource(R.drawable.remerciement); //Remerciments
                 break;
             case 9:
-                photoTest.setImageResource(R.drawable.ic_grenade); //Solidarité
+                photoTest.setImageResource(R.drawable.solidarity3); //Solidarité
                 break;
             case 10:
-                photoTest.setImageResource(R.drawable.background_sign); //Association
+                photoTest.setImageResource(R.drawable.association); //Association
                 break;
             case 11:
-                photoTest.setImageResource(R.drawable.background_sign3); //Autres
+                photoTest.setImageResource(R.drawable.ic_pomegranate_colored); //Autres
                 break;
             default:
                 break;
