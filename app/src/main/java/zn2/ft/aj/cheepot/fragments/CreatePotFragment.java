@@ -17,11 +17,14 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import zn2.ft.aj.cheepot.PotCreationActivity;
 import zn2.ft.aj.cheepot.PotProfilActivity;
 import zn2.ft.aj.cheepot.R;
 import zn2.ft.aj.cheepot.adpater.PotType;
@@ -49,7 +52,7 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
         potName = (EditText)view.findViewById(R.id.potName);
         spinner = (Spinner) view.findViewById(R.id.spinner);
         photoTest = (ImageView) view.findViewById(R.id.photoTest);
-        createPotButton = (Button) view.findViewById(R.id.createPotButton);
+        createPotButton = (Button) view.findViewById(R.id.newPotButton);
         createPotButton.setOnClickListener(this);
         final List<String> typesList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.types_list)));
         List<PotType> types = new ArrayList<PotType>(12);
@@ -121,14 +124,8 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if(v == createPotButton && valideCreation()){
                 //STORE DATA
-               /*   DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference currentUserDb = myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("createdPots");
-                DatabaseReference potsDb = myRef.child("activePots").push();
-                currentUserDb.setValue(potsDb.getKey());
-                potsDb.setValue(potCreated);
-               */
                 Intent goTo;
-                goTo = new Intent(v.getContext(), PotProfilActivity.class);
+                goTo = new Intent(v.getContext(), PotCreationActivity.class);
                 goTo.putExtra("potCreated", potCreated);
                 startActivity(goTo);
                 getActivity().finish();

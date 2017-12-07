@@ -10,4 +10,7 @@
     <color name="skin">#f5e6d6</color>
     <color name="gray">#d03c3c53</color>
     <color name="kaki">#fefff4</color>
+    <color name="clearGray">#d0c7c7fd</color>
+    <color name="colorButton">#0277bd</color>
+    <color name="clearWhite">#dddcdce4</color>
 </resources>

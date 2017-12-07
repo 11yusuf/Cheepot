@@ -12,7 +12,7 @@ public class Pot implements Serializable {
     public String potName;
     public String description;
     public int type;
-    public String dateCreation;
+    public Date dateCreation;
     public Date dateFin;
     public String creatorUid;
 
@@ -21,22 +21,26 @@ public class Pot implements Serializable {
         this.potName = potName;
         this.type = type;
         this.description = description;
-        this.dateCreation = new Date().toString();
+        this.dateCreation = new Date();
         this.dateFin = dateFin;
         this.creatorUid = creatorUid;
     }
 
-    public Pot(String potName, int type, String creatorUid){
+    public void setter (String description, Date dateFin){
         this.money = 0;
+        this.description = description;
+        this.dateCreation = new Date();
+        this.dateFin = dateFin;
+    }
+    public Pot(String potName, int type, String creatorUid){
         this.potName = potName;
         this.type = type;
-        this.dateCreation = new Date().toString();
         this.creatorUid = creatorUid;
     }
     public Pot(){  this.money = 0;
     }
 
     public void addMoney( int money){
-        this.money = money;
+        this.money += money;
     }
 }

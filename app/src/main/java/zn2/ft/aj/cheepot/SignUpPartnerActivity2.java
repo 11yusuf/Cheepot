@@ -57,28 +57,21 @@ public class SignUpPartnerActivity2 extends Activity implements OnClickListener 
     private EditText editMatricule;
     private EditText editCompteBancaire;
     private Partner partner;
-
-    private OnDateSetListener DateSetListener;
     private ProgressDialog progressDialog;
-    Dialog dialog;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_sign_up_partner2);
         mAuth = FirebaseAuth.getInstance();
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         editFirmName = (EditText) findViewById(R.id.editFirmName);
         editMatricule = (EditText) findViewById(R.id.editMatricule);
         editCompteBancaire = (EditText) findViewById(R.id.editCompteBancaire);
         partner = (Partner) getIntent().getSerializableExtra("partner");
-
-
         buttonRegister.setOnClickListener(this);
-
-
     }
 
 
@@ -116,7 +109,7 @@ public class SignUpPartnerActivity2 extends Activity implements OnClickListener 
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(SignUpPartnerActivity2.this, "registered successfully", Toast.LENGTH_SHORT).show();
-                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("Partners");
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("partners");
                             DatabaseReference currentUserDb = myRef.child(mAuth.getCurrentUser().getUid()).child("patnerInfo");
                             partner.setter(FirmName, Matricule, CompteBancaire);
                             currentUserDb.setValue(partner);
