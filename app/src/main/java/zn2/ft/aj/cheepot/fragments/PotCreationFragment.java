@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.varunest.sparkbutton.SparkButton;
 import com.varunest.sparkbutton.SparkEventListener;
 
+import org.joda.time.DateTime;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -39,7 +42,6 @@ import zn2.ft.aj.cheepot.R;
 import zn2.ft.aj.cheepot.SignUpActivity;
 import zn2.ft.aj.cheepot.data.Pot;
 
-import static android.content.ContentValues.TAG;
 
 
 /**
@@ -54,9 +56,8 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
     private DatePickerDialog.OnDateSetListener DateSetListener;
     private ImageButton calendar;
     private int yearF, monthF, dayF;
-    private Date dateF;
-    private EditText potToCreateDescription;
-
+     private EditText potToCreateDescription;
+    private DateTime dateFin;
     public PotCreationFragment() {
         // Required empty public constructor
     }
@@ -77,11 +78,12 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
         final View view = inflater.inflate(R.layout.fragment_pot_creation, container, false);
         View photoHeader = view.findViewById(R.id.photoHeader);
         mAuth = FirebaseAuth.getInstance();
-        yearF = monthF = dayF = 0;
         sparkButton = (SparkButton) view.findViewById(R.id.finishPotCreation);
         potToCreateName = (TextView) view.findViewById(R.id.potToCreateName);
         potToCreateName.setText(potToCreate.potName);
         potToCreateDescription = (EditText) view.findViewById(R.id.potToCreateDescription);
+
+        yearF = monthF = dayF = 1;
         dateFinish = (TextView) view.findViewById(R.id.dateFinTextView);
         calendar = (ImageButton) view.findViewById(R.id.calendar);
         calendar.setOnClickListener(this);
@@ -129,7 +131,11 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
             @Override
             public void onEventAnimationStart(ImageView button, boolean buttonState) {
                 if (!ko) {
-                    potToCreate.setter(potToCreateDescription.getText().toString(),dateF);
+                   String Description = "Sans description";
+                    if (!TextUtils.isEmpty(potToCreateDescription.getText().toString())){
+                        Description = potToCreateDescription.getText().toString();
+                    }
+                    potToCreate.setter(Description, yearF, monthF,dayF);
                     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                     DatabaseReference currentUserDb = myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("createdPots");
                     DatabaseReference potsDb = myRef.child("activePots").push();
@@ -151,6 +157,12 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
         }
+     /*   if (view == backButton){
+            Intent goTo;
+            goTo = new Intent(view.getContext(), HomeActivity.class);
+            startActivity(goTo);
+            getActivity().finish();
+        }*/
     }
 
     private Drawable changeBackground(int position) {
@@ -186,13 +198,14 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
     }
 
     public boolean notValidCreation() {
-
-        dateF = new Date((yearF - 1900), monthF, dayF, 0, 0, 0);
-        Date cmp = new Date();
-        if (cmp.after(dateF)) {
+        //if()
+        dateFin = new DateTime(yearF,monthF,dayF,23,59);
+        DateTime cmp = new DateTime();
+        if (cmp.isAfter(dateFin)) {
             Toast.makeText(getActivity(), "la date est invalide", Toast.LENGTH_SHORT).show();
             return true;
         }
+       // Toast.makeText(getActivity(), dateF.toString()+"la date est invalide", Toast.LENGTH_SHORT).show();
         return false;
     }
 

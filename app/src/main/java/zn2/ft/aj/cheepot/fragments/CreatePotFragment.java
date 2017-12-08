@@ -46,7 +46,10 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance() ;
+        if ( mAuth == null){
+            Toast.makeText(getActivity(),"pas de connection",Toast.LENGTH_SHORT).show();
+        }
         View view = inflater.inflate(R.layout.fragment_create_pot, container, false);
         potBackground = (CardView) view.findViewById(R.id.potBackground);
         potName = (EditText)view.findViewById(R.id.potName);

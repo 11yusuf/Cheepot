@@ -12,9 +12,10 @@ public class Partner implements Serializable {
     public String birthDate;
     public String password;
     public String gender;
-    public String namefirm;
+    public String nameFirm;
     public String matricule;
-    public String comptebancaire;
+    public String compteBancaire;
+    public String siteWeb;
 
     public Partner(String name, String familyName, String birthDate, String password , String gender){
         this.name = name;
@@ -25,10 +26,11 @@ public class Partner implements Serializable {
 
     }
 
-    public void setter( String namefirm , String matricule ,String comptebancaire){
-        this.namefirm = namefirm;
+    public void setter( String namefirm , String siteWeb, String matricule ,String comptebancaire){
+        this.nameFirm = namefirm;
         this.matricule = matricule;
-        this.comptebancaire = comptebancaire;
+        this.compteBancaire = comptebancaire;
+        this.siteWeb = siteWeb;
     }
 
 

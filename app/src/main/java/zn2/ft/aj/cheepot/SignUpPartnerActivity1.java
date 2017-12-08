@@ -78,11 +78,11 @@ public class SignUpPartnerActivity1 extends Activity implements OnClickListener 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_sign_up_partner1);
         buttonSuivant = (Button) findViewById(R.id.buttonSuivant);
-        editName = (EditText) findViewById(R.id.editName);
-        editFamilyName = (EditText) findViewById(R.id.editFamilyName);
-        spinner = (Spinner) findViewById(R.id.spinner);
-        dateDeNaissance = (TextView) findViewById(R.id.date);
-        calendar = (ImageButton) findViewById(R.id.calendar);
+        editName = (EditText) findViewById(R.id.editNamePartner);
+        editFamilyName = (EditText) findViewById(R.id.editFamilyNamePartner);
+        spinner = (Spinner) findViewById(R.id.spinnerPartner);
+        dateDeNaissance = (TextView) findViewById(R.id.datePartner);
+        calendar = (ImageButton) findViewById(R.id.calendarPartner);
         calendar.setOnClickListener(this);
         DateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -93,14 +93,11 @@ public class SignUpPartnerActivity1 extends Activity implements OnClickListener 
                 day = dd;
             }
         };
+        editEmail = (EditText) findViewById(R.id.editEmailPartner);
+        editPassword = (EditText) findViewById(R.id.editPasswordPartner);
+        editRePassword = (EditText) findViewById(R.id.editRePasswordPartner);
+        textViewSignin = (TextView) findViewById(R.id.textViewSignInPartner);
 
-        editEmail = (EditText) findViewById(R.id.editEmail);
-        editPassword = (EditText) findViewById(R.id.editPassword);
-        editRePassword = (EditText) findViewById(R.id.editRePassword);
-        textViewConditions = (TextView) findViewById(R.id.textViewConditions);
-        textViewConditions.setOnClickListener(this);
-
-        textViewSignin = (TextView) findViewById(R.id.textViewSignin);
         buttonSuivant.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
         year = 0;

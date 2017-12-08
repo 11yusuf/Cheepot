@@ -40,6 +40,7 @@ dependencies {
     })
     compile 'com.github.varunest:sparkbutton:1.0.5'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'joda-time:joda-time:2.3'
 }
 allprojects {
     repositories {

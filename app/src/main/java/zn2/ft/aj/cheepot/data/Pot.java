@@ -12,25 +12,25 @@ public class Pot implements Serializable {
     public String potName;
     public String description;
     public int type;
-    public Date dateCreation;
-    public Date dateFin;
+    public String dateCreation;
+    public String dateFin;
     public String creatorUid;
 
-    public Pot(String potName, String description, int type, Date dateFin, String creatorUid){
+    public Pot(String potName, String description, int type, String dateFin, String creatorUid){
         this.money = 0;
         this.potName = potName;
         this.type = type;
         this.description = description;
-        this.dateCreation = new Date();
+        this.dateCreation = new Date().toString();
         this.dateFin = dateFin;
         this.creatorUid = creatorUid;
     }
 
-    public void setter (String description, Date dateFin){
-        this.money = 0;
+    public void setter (String description, int year, int month, int day){
         this.description = description;
-        this.dateCreation = new Date();
-        this.dateFin = dateFin;
+        this.money = 0;
+        this.dateCreation= new Date().toString();
+        this.dateFin = String.format("%d/%d/%d", year, month, day);
     }
     public Pot(String potName, int type, String creatorUid){
         this.potName = potName;

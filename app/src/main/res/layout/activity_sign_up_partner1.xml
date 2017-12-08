@@ -7,7 +7,6 @@
     tools:context="zn2.ft.aj.cheepot.SignUpPartnerActivity1">
 
     <ScrollView
-        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,19 +22,23 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editFamilyName"
+                android:id="@+id/editFamilyNamePartner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginTop="10dp"
+                android:padding="12dp"
+                android:background="@drawable/edit_text_background"
+                android:layout_marginTop="15dp"
                 android:hint="Nom"
                 android:inputType="text"
                 android:textCursorDrawable="@drawable/custom_edit_text_cursor" />
 
             <EditText
-                android:id="@+id/editName"
+                android:id="@+id/editNamePartner"
+                android:padding="12dp"
+                android:background="@drawable/edit_text_background"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
@@ -48,7 +51,7 @@
 
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinnerPartner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -66,7 +69,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/date"
+                    android:id="@+id/datePartner"
                     android:layout_width="260dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
@@ -80,7 +83,7 @@
                     />
 
                 <ImageButton
-                    android:id="@+id/calendar"
+                    android:id="@+id/calendarPartner"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
@@ -92,22 +95,26 @@
 
 
             <EditText
-                android:id="@+id/editEmail"
+                android:id="@+id/editEmailPartner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:padding="12dp"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginTop="10dp"
                 android:hint="Adresse Mail"
                 android:inputType="textEmailAddress"
                 android:textCursorDrawable="@drawable/custom_edit_text_cursor" />
 
             <EditText
-                android:id="@+id/editPassword"
+                android:id="@+id/editPasswordPartner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
+                android:padding="12dp"
+                android:background="@drawable/edit_text_background"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
@@ -116,7 +123,7 @@
                 android:textCursorDrawable="@drawable/custom_edit_text_cursor" />
 
             <EditText
-                android:id="@+id/editRePassword"
+                android:id="@+id/editRePasswordPartner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
@@ -124,6 +131,8 @@
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:hint="Confirmer mot de passe"
+                android:padding="12dp"
+                android:background="@drawable/edit_text_background"
                 android:inputType="textPassword"
                 android:textCursorDrawable="@drawable/custom_edit_text_cursor" />
 
@@ -135,10 +144,11 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="5dp"
-                android:text="Suivant" />
+                android:text="Suivant"
+                android:textSize="18dp"/>
 
             <TextView
-                android:id="@+id/textViewSignin"
+                android:id="@+id/textViewSignInPartner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"

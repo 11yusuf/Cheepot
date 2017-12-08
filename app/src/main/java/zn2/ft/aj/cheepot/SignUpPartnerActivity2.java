@@ -56,6 +56,7 @@ public class SignUpPartnerActivity2 extends Activity implements OnClickListener 
     private EditText editFirmName;
     private EditText editMatricule;
     private EditText editCompteBancaire;
+    private EditText editFirmWebsite;
     private Partner partner;
     private ProgressDialog progressDialog;
 
@@ -70,6 +71,7 @@ public class SignUpPartnerActivity2 extends Activity implements OnClickListener 
         editFirmName = (EditText) findViewById(R.id.editFirmName);
         editMatricule = (EditText) findViewById(R.id.editMatricule);
         editCompteBancaire = (EditText) findViewById(R.id.editCompteBancaire);
+        editFirmWebsite = (EditText) findViewById(R.id.editFirmWebSite);
         partner = (Partner) getIntent().getSerializableExtra("partner");
         buttonRegister.setOnClickListener(this);
     }
@@ -84,9 +86,10 @@ public class SignUpPartnerActivity2 extends Activity implements OnClickListener 
 
 
     private void registerUser() {
-        final String FirmName = editFirmName.getText().toString().trim();
-        final String Matricule = editMatricule.getText().toString().trim();
-        final String CompteBancaire = editCompteBancaire.getText().toString().trim();
+        final String firmName = editFirmName.getText().toString().trim();
+        final String matricule = editMatricule.getText().toString().trim();
+        final String compteBancaire = editCompteBancaire.getText().toString().trim();
+        final String webSite = editFirmWebsite.getText().toString().trim();
         String email = getIntent().getStringExtra("email");
         final String password;
 
@@ -111,7 +114,7 @@ public class SignUpPartnerActivity2 extends Activity implements OnClickListener 
                             Toast.makeText(SignUpPartnerActivity2.this, "registered successfully", Toast.LENGTH_SHORT).show();
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("partners");
                             DatabaseReference currentUserDb = myRef.child(mAuth.getCurrentUser().getUid()).child("patnerInfo");
-                            partner.setter(FirmName, Matricule, CompteBancaire);
+                            partner.setter(firmName, matricule, compteBancaire,webSite);
                             currentUserDb.setValue(partner);
                             Intent homeIntent = new Intent(SignUpPartnerActivity2.this, LoginActivity.class);
                             startActivity(homeIntent);
