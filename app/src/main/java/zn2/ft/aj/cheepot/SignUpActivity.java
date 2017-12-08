@@ -162,7 +162,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
             Calendar cal = Calendar.getInstance();
             DatePickerDialog dialog = new DatePickerDialog(
                     SignUpActivity.this,
-                    android.R.style.Theme_DeviceDefault_Dialog_MinWidth, DateSetListener, year, month, day);
+                    android.R.style.Theme_DeviceDefault_Dialog_MinWidth, DateSetListener, 2017, 11, 21);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
 

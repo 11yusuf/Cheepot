@@ -1,0 +1,22 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layoutbackgoundpotcreation"
+    tools:context=".fragments.PotCreationFragment"
+    android:background="@drawable/backgroundpotcreation">
+
+    <ImageButton
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:clickable="true"
+        android:background="@drawable/ic_arrow_back_white_36dp"/>
+
+    <include layout="@layout/profile"/>
+
+</LinearLayout>

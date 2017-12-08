@@ -50,8 +50,6 @@ import static android.app.DatePickerDialog.*;
 import static android.graphics.Color.TRANSPARENT;
 
 public class SignUpPartnerActivity1 extends Activity implements OnClickListener {
-    private FirebaseAuth mAuth;
-    private Button buttonReg;
     private EditText editName;
     private EditText editFamilyName;
     private TextView dateDeNaissance;
@@ -62,7 +60,6 @@ public class SignUpPartnerActivity1 extends Activity implements OnClickListener 
     private EditText editRePassword;
     private TextView textViewSignin;
     private Button buttonSuivant;
-    private ProgressDialog progressDialog;
     private int year;
     private int month;
     private int day;
@@ -80,7 +77,6 @@ public class SignUpPartnerActivity1 extends Activity implements OnClickListener 
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_sign_up_partner1);
-        mAuth = FirebaseAuth.getInstance();
         buttonSuivant = (Button) findViewById(R.id.buttonSuivant);
         editName = (EditText) findViewById(R.id.editName);
         editFamilyName = (EditText) findViewById(R.id.editFamilyName);
@@ -101,16 +97,13 @@ public class SignUpPartnerActivity1 extends Activity implements OnClickListener 
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
         editRePassword = (EditText) findViewById(R.id.editRePassword);
-
         textViewConditions = (TextView) findViewById(R.id.textViewConditions);
         textViewConditions.setOnClickListener(this);
 
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
         buttonSuivant.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
-        progressDialog = new ProgressDialog(this);
         year = 0;
-
         final List<String> plantsList = new ArrayList<>(Arrays.asList(plants));
         // Initializing an ArrayAdapter
         final ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
@@ -148,18 +141,16 @@ public class SignUpPartnerActivity1 extends Activity implements OnClickListener 
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 gender = position;
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
 
     }
-/*
-    @Override
-    public void onStart() {
+
+    /*  @Override
+     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -187,7 +178,6 @@ public class SignUpPartnerActivity1 extends Activity implements OnClickListener 
             startActivity(goToLogin);
             finish();
         }
-
         if (view == buttonSuivant) {
             // sign up partenaire
             if (validSuivant()) {
