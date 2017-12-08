@@ -64,7 +64,7 @@ public class HomeActivity extends AppCompatActivity
         setupViewPager(mViewPager);
 
         //get userInfo from firebase
-        /*databaseReference = FirebaseDatabase.getInstance().getReference("users");
+       /* databaseReference = FirebaseDatabase.getInstance().getReference("users");
         databaseReference.child(mAuth.getCurrentUser().getUid()).child("userInfo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
