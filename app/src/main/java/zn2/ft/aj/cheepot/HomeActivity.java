@@ -50,7 +50,6 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         mAuth = FirebaseAuth.getInstance();
 
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
