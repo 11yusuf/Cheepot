@@ -13,4 +13,5 @@
     <color name="clearGray">#d0c7c7fd</color>
     <color name="colorButton">#0277bd</color>
     <color name="clearWhite">#dddcdce4</color>
+    <color name="grey">#dddcdce4</color>
 </resources>

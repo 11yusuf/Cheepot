@@ -130,10 +130,10 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
                 Intent goTo;
                 goTo = new Intent(v.getContext(), PotCreationActivity.class);
                 goTo.putExtra("potCreated", potCreated);
+                goTo.putExtra("typeEntry",0);
                 startActivity(goTo);
                 getActivity().finish();
         }
-
     }
 
     public boolean valideCreation(){

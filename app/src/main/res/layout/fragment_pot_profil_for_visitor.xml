@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layoutbackgoundpotcreation"
-    tools:context=".fragments.PotCreationFragment"
+    tools:context=".fragments.PotProfilForVisitorFragment"
     android:background="@drawable/backgroundpotcreation">
 
     <ImageButton
@@ -18,6 +18,6 @@
         android:clickable="true"
         android:background="@drawable/ic_arrow_back_white_36dp"/>
 
-    <include layout="@layout/profil_for_creation"/>
+    <include layout="@layout/profil_for_visitor"/>
 
 </LinearLayout>

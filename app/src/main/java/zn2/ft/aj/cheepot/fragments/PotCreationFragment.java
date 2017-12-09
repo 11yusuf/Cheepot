@@ -43,7 +43,6 @@ import zn2.ft.aj.cheepot.SignUpActivity;
 import zn2.ft.aj.cheepot.data.Pot;
 
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -56,8 +55,9 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
     private DatePickerDialog.OnDateSetListener DateSetListener;
     private ImageButton calendar;
     private int yearF, monthF, dayF;
-     private EditText potToCreateDescription;
+    private EditText potToCreateDescription;
     private DateTime dateFin;
+
     public PotCreationFragment() {
         // Required empty public constructor
     }
@@ -74,7 +74,6 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         final View view = inflater.inflate(R.layout.fragment_pot_creation, container, false);
         View photoHeader = view.findViewById(R.id.photoHeader);
         mAuth = FirebaseAuth.getInstance();
@@ -82,7 +81,6 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
         potToCreateName = (TextView) view.findViewById(R.id.potToCreateName);
         potToCreateName.setText(potToCreate.potName);
         potToCreateDescription = (EditText) view.findViewById(R.id.potToCreateDescription);
-
         yearF = monthF = dayF = 1;
         dateFinish = (TextView) view.findViewById(R.id.dateFinTextView);
         calendar = (ImageButton) view.findViewById(R.id.calendar);
@@ -131,11 +129,11 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
             @Override
             public void onEventAnimationStart(ImageView button, boolean buttonState) {
                 if (!ko) {
-                   String Description = "Sans description";
-                    if (!TextUtils.isEmpty(potToCreateDescription.getText().toString())){
+                    String Description = "Sans description";
+                    if (!TextUtils.isEmpty(potToCreateDescription.getText().toString())) {
                         Description = potToCreateDescription.getText().toString();
                     }
-                    potToCreate.setter(Description, yearF, monthF,dayF);
+                    potToCreate.setter(Description, yearF, monthF, dayF);
                     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                     DatabaseReference currentUserDb = myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("createdPots");
                     DatabaseReference potsDb = myRef.child("activePots").push();
@@ -153,7 +151,7 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
             Calendar cal = Calendar.getInstance();
             DatePickerDialog dialog = new DatePickerDialog(
                     view.getContext(),
-                    android.R.style.Theme_DeviceDefault_Dialog_MinWidth, DateSetListener,2017,11,21);
+                    android.R.style.Theme_DeviceDefault_Dialog_MinWidth, DateSetListener, 2017, 11, 21);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
         }
@@ -199,13 +197,13 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
 
     public boolean notValidCreation() {
         //if()
-        dateFin = new DateTime(yearF,monthF,dayF,23,59);
+        dateFin = new DateTime(yearF, monthF, dayF, 23, 59);
         DateTime cmp = new DateTime();
         if (cmp.isAfter(dateFin)) {
             Toast.makeText(getActivity(), "la date est invalide", Toast.LENGTH_SHORT).show();
             return true;
         }
-       // Toast.makeText(getActivity(), dateF.toString()+"la date est invalide", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getActivity(), dateF.toString()+"la date est invalide", Toast.LENGTH_SHORT).show();
         return false;
     }
 

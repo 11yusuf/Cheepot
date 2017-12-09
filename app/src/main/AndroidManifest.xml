@@ -21,21 +21,26 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".SignUpActivity"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".PotProfilActivity" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
 
         </activity>
-        <activity android:name=".SignUpPartnerActivity1">
-        </activity>
-        <activity android:name=".SignUpPartnerActivity2" />
+        <activity
+            android:name=".SignUpPartnerActivity1"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".SignUpPartnerActivity2"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".PotCreationActivity"
-            android:theme="@style/AppTheme2">
+            android:theme="@style/AppTheme2"
+            android:windowSoftInputMode="adjustPan">
 
         </activity>
     </application>
