@@ -137,10 +137,9 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener 
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     User tmpuser = dataSnapshot.getValue(User.class);
-                    // Toast.makeText(getApplicationContext(), user.name + "  " + user.familyName, Toast.LENGTH_SHORT).show();
                     Intent goTo;
                     goTo = new Intent(getContext(), PotCreationActivity.class);
-                    potCreated = new Pot(potName.getText().toString(), selectedItem, mAuth.getCurrentUser().getUid().toString(),tmpuser.name);
+                    potCreated = new Pot(potName.getText().toString().trim(), selectedItem, mAuth.getCurrentUser().getUid().toString(),tmpuser.name+ " " + tmpuser.familyName);
                     goTo.putExtra("pot", potCreated);
                     goTo.putExtra("typeEntry", 0);
                     startActivity(goTo);
@@ -156,7 +155,7 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener 
     }
 
     public boolean valideCreation() {
-        if (TextUtils.isEmpty(potName.getText().toString())) {
+        if (TextUtils.isEmpty(potName.getText().toString().trim())) {
             Toast.makeText(getActivity(), "Entrez un nom pour la cagnotte", Toast.LENGTH_SHORT).show();
             return false;
         }

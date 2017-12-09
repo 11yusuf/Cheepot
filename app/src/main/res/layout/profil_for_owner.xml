@@ -72,25 +72,36 @@
             android:layout_height="0dp"
             android:layout_below="@id/tvEducation"
             android:layout_centerHorizontal="true" />
-
-        <Button
-            android:id="@+id/btnMessage"
+        <RelativeLayout
+            android:id="@+id/relativeLayoutbutton"
             android:layout_width="110dp"
             android:layout_height="40dp"
+            android:layout_marginBottom="16dp"
             android:layout_toLeftOf="@id/spaceHolder"
             android:layout_toStartOf="@id/spaceHolder"
             android:layout_below="@id/tvAddress"
-            android:layout_marginBottom="16dp"
+            >
+        <Button
+            android:id="@+id/buttonPartager"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingEnd="10dp"
             android:background="@drawable/message_button"
             android:textColor="@color/colorButton"
-            android:text="Partager"
+            android:text="Partager   "
             android:textSize="16sp"
             android:fontFamily="sans-serif-medium"/>
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_facebook"
+                android:layout_marginLeft="90dp"
+                />
+        </RelativeLayout>
         <Button
             android:layout_width="110dp"
             android:layout_height="40dp"
@@ -116,12 +127,12 @@
 
 
         <Button
-            android:id="@+id/btnMessage3"
+            android:id="@+id/buttonDepenser"
             android:layout_width="110dp"
             android:layout_height="40dp"
             android:layout_toLeftOf="@id/spaceHolder2"
             android:layout_toStartOf="@id/spaceHolder2"
-            android:layout_below="@id/btnMessage"
+            android:layout_below="@id/relativeLayoutbutton"
             android:layout_marginBottom="16dp"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
@@ -129,7 +140,7 @@
             android:paddingEnd="10dp"
             android:background="@drawable/message_button"
             android:textColor="@color/colorButton"
-            android:text="Partager"
+            android:text="Dépenser"
             android:textSize="16sp"
             android:fontFamily="sans-serif-medium"/>
 
@@ -138,7 +149,7 @@
             android:layout_height="40dp"
             android:layout_toRightOf="@id/spaceHolder2"
             android:layout_toEndOf="@id/spaceHolder2"
-            android:layout_below="@id/btnMessage"
+            android:layout_below="@id/relativeLayoutbutton"
             android:layout_marginBottom="16dp"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
@@ -146,20 +157,8 @@
             android:paddingEnd="10dp"
             android:background="@drawable/connect_button"
             android:textColor="@android:color/white"
-            android:text="Verser"
+            android:text="Modifier"
             android:textSize="16sp"
-            android:fontFamily="sans-serif-medium"/>
-        <TextView
-            android:id="@+id/tvSummary"
-            android:layout_width="310dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/btnMessage3"
-            android:gravity="center"
-            android:lines="2"
-            android:ellipsize="end"
-            android:text="I'm a renewable energy executive with 10 years of experience, and have built strong skills in getting companies"
-            android:textSize="14sp"
             android:fontFamily="sans-serif-medium"/>
     </RelativeLayout>
 

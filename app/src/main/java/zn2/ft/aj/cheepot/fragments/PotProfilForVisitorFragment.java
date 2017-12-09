@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -36,7 +37,16 @@ public class PotProfilForVisitorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pot_profil_for_visitor, container, false);
+        View view = inflater.inflate(R.layout.fragment_pot_profil_for_visitor, container, false);
+        View photoHeader = view.findViewById(R.id.photoHeader);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            /* For devices equal or higher than lollipop set the translation above everything else */
+            photoHeader.setTranslationZ(6);
+            /* Redraw the view to show the translation */
+            photoHeader.invalidate();
+        }
+        return  view;
     }
 
     private Drawable changeBackground(int position) {
