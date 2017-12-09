@@ -147,6 +147,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 gender = position;
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -209,17 +210,18 @@ public class SignUpActivity extends Activity implements OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(SignUpActivity.this, "registered successfully", Toast.LENGTH_SHORT).show();
+                            sendVerificationEmail();
+                            Toast.makeText(SignUpActivity.this, "Un email de confirmation a été envoyé ", Toast.LENGTH_SHORT).show();
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("users");
                             DatabaseReference currentUserDb = myRef.child(mAuth.getCurrentUser().getUid()).child("userInfo");
                             User user = new User(name, familyName, String.format("%d/%d/%d", day, month, year), password, plants[gender], 0);
                             currentUserDb.setValue(user);
                             Intent homeIntent = new Intent(SignUpActivity.this, LoginActivity.class);
+                            mAuth.signOut();
                             startActivity(homeIntent);
                             finish();
-
                         } else {
-                            Toast.makeText(SignUpActivity.this, "Vous etes déjà inscrit", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "Vous êtes déjà inscrit", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -271,7 +273,20 @@ public class SignUpActivity extends Activity implements OnClickListener {
         }
         return true;
     }
+
+
+    public void sendVerificationEmail() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                    } else {
+                        Toast.makeText(SignUpActivity.this, "un probléme de vérification email.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
 }
-
-
-

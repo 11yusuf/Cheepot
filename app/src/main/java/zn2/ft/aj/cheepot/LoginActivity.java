@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -21,6 +22,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import zn2.ft.aj.cheepot.data.MD5;
+
+import static android.content.ContentValues.TAG;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
@@ -94,9 +97,18 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Intent goToProfil = new Intent(LoginActivity.this, HomeActivity.class);
-                            startActivity(goToProfil);
-                            finish();
+                            try{
+                                if(user.isEmailVerified()){
+                                    Intent goToProfil = new Intent(LoginActivity.this, HomeActivity.class);
+                                    startActivity(goToProfil);
+                                    finish();
+                                }else{
+                                    Toast.makeText(LoginActivity.this, "Votre Email n'est pas vérifié \n vérifiez votre email courrier.", Toast.LENGTH_SHORT).show();
+                                    mAuth.signOut();
+                                }
+                            }catch (NullPointerException e){
+                                Log.e(TAG, "onComplete: NullPointerException: " + e.getMessage() );
+                            }
                         }else {
                             Toast.makeText(LoginActivity.this, "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();
                         }
