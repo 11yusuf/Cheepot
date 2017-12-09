@@ -73,17 +73,11 @@ public class PotAdapter extends RecyclerView.Adapter<PotAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        if (type == 1) {
-            int x = mDataSet.get(position).money;
-            holder.mTextView.setText(mDataSet.get(position).potName);
-            holder.potClickedOn = mDataSet.get(position);
-        }
-        if (type == 2) {
-            //holder.mTextView.setText(mDataSet.get(position).potName);
-            holder.mTextView.setText(mDataSet.get(position).creatorName);
-            holder.potClickedOn = mDataSet.get(position);
-        }
+    public void onBindViewHolder(ViewHolder holder, int position){
+
+        int x = mDataSet.get(position).money;
+        holder.mTextView.setText(mDataSet.get(position).potName);
+        holder.potClickedOn = mDataSet.get(position);
     }
 
     @Override

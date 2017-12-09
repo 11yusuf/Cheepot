@@ -38,13 +38,12 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private SectionsPageAdapter mSectionsPageAdapter;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference ;
     private TextView userName;
     private ViewPager mViewPager;
     private FirebaseAuth mAuth;
     private SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
     private User user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,18 +60,18 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
-        userName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userName);
+        userName = (TextView)navigationView.getHeaderView(0).findViewById(R.id.userName);
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
-
-        // user = new User();
+        setupViewPager(mViewPager);
+       // user = new User();
         //get userInfo from firebase
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
         databaseReference.child(mAuth.getCurrentUser().getUid()).child("userInfo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User tmpuser = dataSnapshot.getValue(User.class);
-                // Toast.makeText(getApplicationContext(), user.name + "  " + user.familyName, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), user.name + "  " + user.familyName, Toast.LENGTH_SHORT).show();
                 userName.setText(tmpuser.name + " " + tmpuser.familyName);
             }
 
@@ -81,7 +80,7 @@ public class HomeActivity extends AppCompatActivity
 
             }
         });
-        setupViewPager(mViewPager);
+
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_add_colored);
@@ -122,7 +121,7 @@ public class HomeActivity extends AppCompatActivity
                         tabLayout.getTabAt(4).setIcon(R.drawable.ic_find);
                         break;
                     }
-                    case 3: {
+                    case 3:{
                         tabLayout.getTabAt(0).setIcon(R.drawable.ic_add);
                         tabLayout.getTabAt(1).setIcon(R.drawable.ic_pomegranate);
                         tabLayout.getTabAt(2).setIcon(R.drawable.ic_star);
@@ -192,11 +191,9 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setupViewPager(ViewPager viewPager) {
-       // CreatePotFragment createPotFragment = new CreatePotFragment();
-        //createPotFragment.setCreatorName(userName.getText().toString());
-        adapter.addFragment(createPotFragment, "haha2");
+        adapter.addFragment(new CreatePotFragment(), "haha2");
         adapter.addFragment(new MyPotsFragment(), "FavoritePots");
-        adapter.addFragment(new FavoritePotsFragment(), "haha1");
+        adapter.addFragment( new FavoritePotsFragment(), "haha1");
         adapter.addFragment(new NotificationsFragment(), "haha3");
         adapter.addFragment(new SearchFragment(), "haha4");
         viewPager.setAdapter(adapter);

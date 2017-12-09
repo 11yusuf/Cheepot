@@ -42,6 +42,12 @@ public class Pot implements Serializable {
         this.creatorUid = creatorUid;
         this.creatorName = creatorName;
     }
+
+    public Pot(String potName, int type, String creatorUid){
+        this.potName = potName;
+        this.type = type;
+        this.creatorUid = creatorUid;
+    }
     public Pot(){  this.money = 0;
     }
 

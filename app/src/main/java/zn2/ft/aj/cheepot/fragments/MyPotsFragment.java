@@ -128,7 +128,6 @@ public class MyPotsFragment extends Fragment {
         return view;
     }
 
-
 }
 
 

@@ -19,7 +19,6 @@ public class PotCreationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pot_creation);
-
         type = (int) getIntent().getIntExtra("typeEntry", 0);
         pot = (Pot) getIntent().getSerializableExtra("pot");
         Bundle bundle = new Bundle();
