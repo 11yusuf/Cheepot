@@ -17,8 +17,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,9 +33,10 @@ import zn2.ft.aj.cheepot.R;
 import zn2.ft.aj.cheepot.adpater.PotType;
 import zn2.ft.aj.cheepot.adpater.PotTypeSpinnerAdapter;
 import zn2.ft.aj.cheepot.data.Pot;
+import zn2.ft.aj.cheepot.data.User;
 
 
-public class CreatePotFragment extends Fragment implements View.OnClickListener{
+public class CreatePotFragment extends Fragment implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
     private EditText potName;
@@ -46,13 +50,13 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mAuth = FirebaseAuth.getInstance() ;
-        if ( mAuth == null){
-            Toast.makeText(getActivity(),"pas de connection",Toast.LENGTH_SHORT).show();
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth == null) {
+            Toast.makeText(getActivity(), "pas de connection", Toast.LENGTH_SHORT).show();
         }
         View view = inflater.inflate(R.layout.fragment_create_pot, container, false);
         potBackground = (CardView) view.findViewById(R.id.potBackground);
-        potName = (EditText)view.findViewById(R.id.potName);
+        potName = (EditText) view.findViewById(R.id.potName);
         spinner = (Spinner) view.findViewById(R.id.spinner);
         photoTest = (ImageView) view.findViewById(R.id.photoTest);
         createPotButton = (Button) view.findViewById(R.id.newPotButton);
@@ -66,7 +70,7 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-               // Toast.makeText(adapterView.getContext(), ((PotType) adapterView.getItemAtPosition(position)).getName(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(adapterView.getContext(), ((PotType) adapterView.getItemAtPosition(position)).getName(), Toast.LENGTH_SHORT).show();
                 selectedItem = position;
                 changeBackground(position);
             }
@@ -125,24 +129,37 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if(v == createPotButton && valideCreation()){
-                //STORE DATA
-                Intent goTo;
-                goTo = new Intent(v.getContext(), PotCreationActivity.class);
-                goTo.putExtra("pot", potCreated);
-                goTo.putExtra("typeEntry",0);
-                startActivity(goTo);
-                getActivity().finish();
-        }
+        if (v == createPotButton && valideCreation()) {
+            //STORE DATA
 
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("users");
+            databaseReference.child(mAuth.getCurrentUser().getUid()).child("userInfo").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User tmpuser = dataSnapshot.getValue(User.class);
+                    // Toast.makeText(getApplicationContext(), user.name + "  " + user.familyName, Toast.LENGTH_SHORT).show();
+                    Intent goTo;
+                    goTo = new Intent(getContext(), PotCreationActivity.class);
+                    potCreated = new Pot(potName.getText().toString(), selectedItem, mAuth.getCurrentUser().getUid().toString(),tmpuser.name);
+                    goTo.putExtra("pot", potCreated);
+                    goTo.putExtra("typeEntry", 0);
+                    startActivity(goTo);
+                    getActivity().finish();
+                }
+                    @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Toast.makeText(getContext(), "Erreur de connection \n verifier votre connection", Toast.LENGTH_SHORT).show();
+                    }
+            });
+
+        }
     }
 
-    public boolean valideCreation(){
-        if (TextUtils.isEmpty(potName.getText().toString())){
+    public boolean valideCreation() {
+        if (TextUtils.isEmpty(potName.getText().toString())) {
             Toast.makeText(getActivity(), "Entrez un nom pour la cagnotte", Toast.LENGTH_SHORT).show();
             return false;
         }
-        potCreated = new Pot(potName.getText().toString(), selectedItem, mAuth.getCurrentUser().getUid().toString());
         return true;
     }
 }
