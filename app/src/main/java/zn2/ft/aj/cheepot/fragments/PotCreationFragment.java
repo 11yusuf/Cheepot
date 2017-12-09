@@ -132,11 +132,11 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
                     String Description = "Sans description";
                     if (!TextUtils.isEmpty(potToCreateDescription.getText().toString())) {
                         Description = potToCreateDescription.getText().toString();
-                    }
-                    potToCreate.setter(Description, yearF, monthF, dayF);
+                    };
                     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                     DatabaseReference currentUserDb = myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("createdPots");
                     DatabaseReference potsDb = myRef.child("activePots").push();
+                    potToCreate.setter(Description, yearF, monthF, dayF,potsDb.getKey());
                     currentUserDb.child(potsDb.getKey()).setValue(potsDb.getKey(), "key");
                     potsDb.setValue(potToCreate);
                 }

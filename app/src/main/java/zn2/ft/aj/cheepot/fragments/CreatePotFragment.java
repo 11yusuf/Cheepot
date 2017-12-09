@@ -43,6 +43,16 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
     private Button createPotButton;
     private Pot potCreated;
 
+    public String getCreatorName() {
+        return creatorName;
+    }
+
+    public void setCreatorName(String creatorName) {
+        this.creatorName = creatorName;
+    }
+
+    private String creatorName;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -141,7 +151,7 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener{
             Toast.makeText(getActivity(), "Entrez un nom pour la cagnotte", Toast.LENGTH_SHORT).show();
             return false;
         }
-        potCreated = new Pot(potName.getText().toString(), selectedItem, mAuth.getCurrentUser().getUid().toString());
+        potCreated = new Pot(potName.getText().toString(), selectedItem, mAuth.getCurrentUser().getUid().toString(), creatorName);
         return true;
     }
 }

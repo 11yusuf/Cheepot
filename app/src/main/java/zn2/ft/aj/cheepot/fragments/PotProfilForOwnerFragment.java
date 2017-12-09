@@ -24,7 +24,7 @@ public class PotProfilForOwnerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            potCreated = (Pot) getArguments().getSerializable("potCreated");
+            potCreated = (Pot) getArguments().getSerializable("potOwned");
         }
         LayerDrawable ld = (LayerDrawable) getResources().getDrawable(R.drawable.backgroundpotcreation);
         Drawable replace = (Drawable) changeBackground(potCreated.type);
