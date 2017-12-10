@@ -33,7 +33,7 @@ public class Pot implements Serializable {
         this.description = description;
         this.money = 0;
         this.dateCreation= new Date().toString();
-        this.dateFin = String.format("%d/%d/%d", year, month, day);
+        this.dateFin = String.format("%d/%d/%d", day, month, year);
         this.potId = potId;
     }
     public Pot(String potName, int type, String creatorUid, String creatorName){
