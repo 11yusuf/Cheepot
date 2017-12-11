@@ -2,7 +2,6 @@ package zn2.ft.aj.cheepot.fragments;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
@@ -11,9 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -25,12 +22,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import zn2.ft.aj.cheepot.FeedbackActivity;
-import zn2.ft.aj.cheepot.PotProfilActivity;
 import zn2.ft.aj.cheepot.R;
 import zn2.ft.aj.cheepot.adpater.PotAdapter;
 import zn2.ft.aj.cheepot.data.Pot;
-import zn2.ft.aj.cheepot.data.User;
 
 /**
  * Created by lenovo-pc on 06/12/2017.
@@ -39,7 +33,6 @@ import zn2.ft.aj.cheepot.data.User;
 public class MyPotsFragment extends Fragment {
 
     private Context mContext;
-
     RelativeLayout mRelativeLayout;
     private RecyclerView mRecyclerView;
 
@@ -56,14 +49,15 @@ public class MyPotsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mypots, container, false);
         mContext = getActivity().getApplicationContext();
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(mContext, 2);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        potsId = new ArrayList();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("createdPots").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                potsId = new ArrayList();
                 Iterable<DataSnapshot> potspointer = dataSnapshot.getChildren();
                 for (DataSnapshot c : potspointer) {
                     String k = c.getValue(String.class);
@@ -81,7 +75,6 @@ public class MyPotsFragment extends Fragment {
                         mRecyclerView.setAdapter(mAdapter);
                     }
 
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
@@ -96,14 +89,6 @@ public class MyPotsFragment extends Fragment {
 
             }
         });
-
-
-        String[] pots = {
-                "Ta7wissa",
-                "Tab7ira"
-
-        };
-
         /*
             GridLayoutManager
                 A RecyclerView.LayoutManager implementations that lays out items in a grid.
@@ -123,7 +108,7 @@ public class MyPotsFragment extends Fragment {
 
         // Initialize a new instance of RecyclerView Adapter instance
 
-        myItem = (CardView) view.findViewById(R.id.card_view);
+        //myItem = (CardView) view.findViewById(R.id.card_view);
 
         return view;
     }

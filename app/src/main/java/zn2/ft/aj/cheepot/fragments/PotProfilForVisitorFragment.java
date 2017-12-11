@@ -137,9 +137,12 @@ public class PotProfilForVisitorFragment extends Fragment implements View.OnClic
 
         View mView = getActivity().getLayoutInflater().inflate(R.layout.dialog_put_money, null);
 
-        final EditText mEmail = (EditText) mView.findViewById(R.id.etEmail);
+        final EditText moneyToPut = (EditText) mView.findViewById(R.id.moneyToPut);
         final EditText mPassword = (EditText) mView.findViewById(R.id.etPassword);
-        Button mLogin = (Button) mView.findViewById(R.id.btnLogin);
+        final TextView confirmationMessage = (TextView) mView.findViewById(R.id.confirmationMessage);
+        Button verify = (Button) mView.findViewById(R.id.buttonVerify);
+        Button confirm = (Button) mView.findViewById(R.id.buttonConfirm);
+        Button cancel = (Button) mView.findViewById(R.id.buttonCancel);
 
 
         mBuilder.setPositiveButton("Login", new DialogInterface.OnClickListener() {

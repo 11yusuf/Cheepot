@@ -18,12 +18,13 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="adjustNothing">
+
+        </activity>
         <activity
             android:name=".SignUpActivity"
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".FeedbackActivity" />
-        <activity android:name=".PotProfilActivity" />
         <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
@@ -41,7 +42,8 @@
             android:name=".PotCreationActivity"
             android:theme="@style/AppTheme2"
             android:windowSoftInputMode="adjustPan">
-
+        </activity>
+        <activity android:name=".ChargerCompteActivity">
         </activity>
     </application>
 

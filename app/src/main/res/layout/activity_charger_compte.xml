@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/kaki"
+    tools:context="zn2.ft.aj.cheepot.ChargerCompteActivity">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editAmmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="15dp"
+                android:background="@drawable/edit_text_background"
+                android:layout_marginTop="50dp"
+                android:hint="Montant à verser : 00.0 TND"
+                android:inputType="number"
+                android:textCursorDrawable="@drawable/custom_edit_text_cursor" />
+
+            <EditText
+                android:id="@+id/editCardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:background="@drawable/edit_text_background"
+                android:hint="Numéro de la carte"
+                android:inputType="number"
+                android:textCursorDrawable="@drawable/custom_edit_text_cursor"/>
+
+            <EditText
+                android:id="@+id/editInternetCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:hint="code internet de la carte"
+                android:inputType="numberPassword"
+                android:padding="15dp"
+                android:background="@drawable/edit_text_background"
+                android:textCursorDrawable="@drawable/custom_edit_text_cursor" />
+
+            <Button
+                android:id="@+id/buttonCharger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="25dp"
+                android:text="Charger compte" />
+
+
+        </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

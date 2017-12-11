@@ -1,11 +1,13 @@
 package zn2.ft.aj.cheepot;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -25,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import zn2.ft.aj.cheepot.adpater.SectionsPageAdapter;
 import zn2.ft.aj.cheepot.data.User;
 import zn2.ft.aj.cheepot.fragments.FavoritePotsFragment;
@@ -44,6 +47,7 @@ public class HomeActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
     private User user;
+    private CircleImageView userPhoto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,18 +65,24 @@ public class HomeActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
         userName = (TextView)navigationView.getHeaderView(0).findViewById(R.id.userName);
+        userPhoto = (CircleImageView)navigationView.getHeaderView(0).findViewById(R.id.userPhoto);
         mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         mViewPager = (ViewPager) findViewById(R.id.container);
         setupViewPager(mViewPager);
        // user = new User();
         //get userInfo from firebase
-        databaseReference = FirebaseDatabase.getInstance().getReference("users");
-        databaseReference.child(mAuth.getCurrentUser().getUid()).child("userInfo").addValueEventListener(new ValueEventListener() {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.child("users").child(mAuth.getCurrentUser().getUid()).child("userInfo").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User tmpuser = dataSnapshot.getValue(User.class);
                // Toast.makeText(getApplicationContext(), user.name + "  " + user.familyName, Toast.LENGTH_SHORT).show();
                 userName.setText(tmpuser.name + " " + tmpuser.familyName);
+                if (tmpuser.gender == "Femme") {
+                    userPhoto.setImageDrawable(getResources().getDrawable(R.drawable.ic_girl));
+                }else{
+                    userPhoto.setImageDrawable(getResources().getDrawable(R.drawable.ic_boy));
+                }
             }
 
             @Override
@@ -166,9 +176,27 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.consult_account) {
-            // Handle the camera action
-        } else if (id == R.id.add_money) {
 
+            databaseReference = FirebaseDatabase.getInstance().getReference("users");
+            databaseReference.child(mAuth.getCurrentUser().getUid()).child("userInfo").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    User tmpuser = dataSnapshot.getValue(User.class);
+                    int x = tmpuser.money;
+                    final AlertDialog alertDialog = new AlertDialog.Builder(HomeActivity.this).create();
+                    alertDialog.setTitle("Votre solde est");
+                    alertDialog.setMessage(Integer.toString(x)+" "+"DT");
+                    alertDialog.show();
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        } else if (id == R.id.add_money) {
+            nextIntent = new Intent(HomeActivity.this, ChargerCompteActivity.class);
+            this.startActivity(nextIntent);
         } else if (id == R.id.settings) {
 
         } else if (id == R.id.log_out) {
@@ -176,11 +204,9 @@ public class HomeActivity extends AppCompatActivity
             nextIntent = new Intent(HomeActivity.this, LoginActivity.class);
             startActivity(nextIntent);
             finish();
-
         } else if (id == R.id.feedback) {
             nextIntent = new Intent(HomeActivity.this, FeedbackActivity.class);
-            startActivity(nextIntent);
-            finish();
+            this.startActivity(nextIntent);
         } else if (id == R.id.support) {
 
         }
@@ -191,11 +217,11 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        adapter.addFragment(new CreatePotFragment(), "haha2");
+        adapter.addFragment(new CreatePotFragment(), "CreatePotFragment");
         adapter.addFragment(new MyPotsFragment(), "FavoritePots");
-        adapter.addFragment( new FavoritePotsFragment(), "haha1");
-        adapter.addFragment(new NotificationsFragment(), "haha3");
-        adapter.addFragment(new SearchFragment(), "haha4");
+        adapter.addFragment( new FavoritePotsFragment(), "FavoritePotsFragment");
+        adapter.addFragment(new NotificationsFragment(), "NotificationFragment");
+        adapter.addFragment(new SearchFragment(), "SearchFragment");
         viewPager.setAdapter(adapter);
     }
 

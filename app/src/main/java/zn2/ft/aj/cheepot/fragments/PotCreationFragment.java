@@ -1,20 +1,15 @@
 package zn2.ft.aj.cheepot.fragments;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,12 +29,10 @@ import com.varunest.sparkbutton.SparkEventListener;
 import org.joda.time.DateTime;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import zn2.ft.aj.cheepot.HomeActivity;
 import zn2.ft.aj.cheepot.PotCreationActivity;
 import zn2.ft.aj.cheepot.R;
-import zn2.ft.aj.cheepot.SignUpActivity;
 import zn2.ft.aj.cheepot.data.Pot;
 
 
@@ -108,11 +101,11 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
                 if (buttonState) {
                     // Button is active
                     ko = notValidCreation();
-                    if (ko) {
+                    if (ko)
                         sparkButton.setChecked(false);
-                    }
                 } else {
                     // Button is inactive
+                    ko = notValidCreation();
                 }
             }
 
@@ -120,7 +113,9 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
             public void onEventAnimationEnd(ImageView button, boolean buttonState) {
                 if (!ko) {
                     Intent goTo;
-                    goTo = new Intent(view.getContext(), HomeActivity.class);
+                    goTo = new Intent(view.getContext(), PotCreationActivity.class);
+                    goTo.putExtra("typeEntry",1);
+                    goTo.putExtra("pot",potToCreate);
                     startActivity(goTo);
                     getActivity().finish();
                 }
@@ -128,15 +123,16 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
 
             @Override
             public void onEventAnimationStart(ImageView button, boolean buttonState) {
+                ko = notValidCreation();
                 if (!ko) {
                     String Description = "Sans description";
                     if (!TextUtils.isEmpty(potToCreateDescription.getText().toString())) {
                         Description = potToCreateDescription.getText().toString();
-                    };
+                    }
                     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                     DatabaseReference currentUserDb = myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("createdPots");
                     DatabaseReference potsDb = myRef.child("activePots").push();
-                    potToCreate.setter(Description, yearF, monthF, dayF,potsDb.getKey());
+                    potToCreate.setter(Description, yearF, monthF, dayF, potsDb.getKey());
                     currentUserDb.child(potsDb.getKey()).setValue(potsDb.getKey(), "key");
                     potsDb.setValue(potToCreate);
                 }
@@ -155,12 +151,6 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
         }
-     /*   if (view == backButton){
-            Intent goTo;
-            goTo = new Intent(view.getContext(), HomeActivity.class);
-            startActivity(goTo);
-            getActivity().finish();
-        }*/
     }
 
     private Drawable changeBackground(int position) {

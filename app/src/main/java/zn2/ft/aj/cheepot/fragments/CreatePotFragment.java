@@ -28,7 +28,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import zn2.ft.aj.cheepot.PotCreationActivity;
-import zn2.ft.aj.cheepot.PotProfilActivity;
 import zn2.ft.aj.cheepot.R;
 import zn2.ft.aj.cheepot.adpater.PotType;
 import zn2.ft.aj.cheepot.adpater.PotTypeSpinnerAdapter;
@@ -142,8 +141,7 @@ public class CreatePotFragment extends Fragment implements View.OnClickListener 
                     potCreated = new Pot(potName.getText().toString().trim(), selectedItem, mAuth.getCurrentUser().getUid().toString(),tmpuser.name+ " " + tmpuser.familyName);
                     goTo.putExtra("pot", potCreated);
                     goTo.putExtra("typeEntry", 0);
-                    startActivity(goTo);
-                    getActivity().finish();
+                    getActivity().startActivity(goTo);
                 }
                     @Override
                 public void onCancelled(DatabaseError databaseError) {

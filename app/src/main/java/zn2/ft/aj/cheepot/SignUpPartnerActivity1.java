@@ -183,8 +183,7 @@ public class SignUpPartnerActivity1 extends Activity implements OnClickListener 
                 nextIntent.putExtra("partner", partner);
                 nextIntent.putExtra("email",editEmail.getText().toString());
                 nextIntent.putExtra("password",editPassword.getText().toString());
-                startActivity(nextIntent);
-                finish();
+                this.startActivity(nextIntent);
             }
         }
     }

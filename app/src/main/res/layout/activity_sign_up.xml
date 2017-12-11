@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_sign"
+    android:background="@color/kaki"
     tools:context="zn2.ft.aj.cheepot.SignUpActivity">
 
     <ScrollView
@@ -196,6 +196,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginTop="4dp"
                 android:text="J'ai déja un compte"
                 android:textAlignment="center" />
         </LinearLayout>

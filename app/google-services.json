@@ -1,29 +1,21 @@
 {
   "project_info": {
-    "project_number": "724360745241",
-    "firebase_url": "https://cheepot-9080c.firebaseio.com",
-    "project_id": "cheepot-9080c",
-    "storage_bucket": "cheepot-9080c.appspot.com"
+    "project_number": "530349281978",
+    "firebase_url": "https://cheepot-4d3c8.firebaseio.com",
+    "project_id": "cheepot-4d3c8",
+    "storage_bucket": "cheepot-4d3c8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:724360745241:android:f59fb2ce6a9f63e1",
+        "mobilesdk_app_id": "1:530349281978:android:f59fb2ce6a9f63e1",
         "android_client_info": {
           "package_name": "zn2.ft.aj.cheepot"
         }
       },
       "oauth_client": [
         {
-          "client_id": "724360745241-rr5tp78irhe252jr5fuqfjioktedl8nn.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "zn2.ft.aj.cheepot",
-            "certificate_hash": "10f549825640684b67cf77a45c33c306f4cc9a75"
-          }
-        },
-        {
-          "client_id": "724360745241-eelviop2ms1vc8e55h3ouuk8h4sdnt3r.apps.googleusercontent.com",
+          "client_id": "530349281978-6pgjh1r7su4157jocbi3cvqp8agos1dp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "zn2.ft.aj.cheepot",
@@ -31,13 +23,13 @@
           }
         },
         {
-          "client_id": "724360745241-bo4id1jdoa8ce5a8qmtaro1kgb3hhde8.apps.googleusercontent.com",
+          "client_id": "530349281978-t9l77euvocp9qhpv98mrcismoh3tfblf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyATTnJU_8vNRXHPW0f2ZYo3pxtwRG-k6Lk"
+          "current_key": "AIzaSyC5pKcJjt_iO_f79wYz3q43iHYMEa-n7Vk"
         }
       ],
       "services": {
@@ -48,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "724360745241-bo4id1jdoa8ce5a8qmtaro1kgb3hhde8.apps.googleusercontent.com",
+              "client_id": "530349281978-t9l77euvocp9qhpv98mrcismoh3tfblf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

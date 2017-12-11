@@ -20,6 +20,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import zn2.ft.aj.cheepot.data.MD5;
 
@@ -48,14 +50,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         textViewMotDePasseOublie = (TextView) findViewById(R.id.textViewMotDePasseOublie);
         textViewCreerCompte = (TextView) findViewById(R.id.textViewCreerCompte);
         textViewIci = (TextView) findViewById(R.id.textViewIci);
-
         textViewMotDePasseOublie.setOnClickListener(this);
         buttonSeConnecter.setOnClickListener(this);
         textViewCreerCompte.setOnClickListener(this);
         textViewIci.setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
         textViewCreerCompte.setPaintFlags( textViewCreerCompte.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        textViewIci.setPaintFlags( textViewIci.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        textViewIci.setPaintFlags(textViewIci.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
     }
     @Override
     public void onStart() {
@@ -77,6 +78,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "Erreur de sécurité, Réessayer", Toast.LENGTH_SHORT).show();
+            return;
         }
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Entrez votre email SVP", Toast.LENGTH_SHORT).show();
@@ -97,6 +99,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
+//                            Intent goToProfil = new Intent(LoginActivity.this, HomeActivity.class);
+//                            startActivity(goToProfil);
+//                            finish();
                             try{
                                 if(user.isEmailVerified()){
                                     Intent goToProfil = new Intent(LoginActivity.this, HomeActivity.class);
@@ -128,14 +133,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         }
         if (view == textViewCreerCompte) {
             nextIntent = new Intent(LoginActivity.this, SignUpActivity.class);
-            startActivity(nextIntent);
-            finish();
+            this.startActivity(nextIntent);
         }
         if (view == textViewIci) {
             // sign up partenaire
             nextIntent = new Intent(LoginActivity.this, SignUpPartnerActivity1.class);
-            startActivity(nextIntent);
-            finish();
+            this.startActivity(nextIntent);
+
         }
     }
 }

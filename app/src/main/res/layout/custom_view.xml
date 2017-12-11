@@ -10,8 +10,8 @@
     android:layout_marginRight="16dp"
     card_view:cardCornerRadius="8dp"
     card_view:cardElevation="8dp"
+    android:background="@color/kaki">
 
-    >
     <LinearLayout
         android:id="@+id/ll"
         android:layout_gravity="center_horizontal|center_vertical"

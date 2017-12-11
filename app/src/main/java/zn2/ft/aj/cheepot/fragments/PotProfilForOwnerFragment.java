@@ -1,31 +1,35 @@
 package zn2.ft.aj.cheepot.fragments;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import zn2.ft.aj.cheepot.R;
+import zn2.ft.aj.cheepot.data.MD5;
 import zn2.ft.aj.cheepot.data.Pot;
-
-import static android.icu.text.Normalizer.YES;
+import zn2.ft.aj.cheepot.data.User;
 
 public class PotProfilForOwnerFragment extends Fragment implements View.OnClickListener {
     private Pot potOwned;
@@ -61,7 +65,19 @@ public class PotProfilForOwnerFragment extends Fragment implements View.OnClickL
             photoHeader.invalidate();
         }
         moneyInPot = (TextView) view.findViewById(R.id.moneyInPot);
-        moneyInPot.setText(Integer.toString(potOwned.money) + " DT");
+        DatabaseReference myDataRef = FirebaseDatabase.getInstance().getReference();
+        myDataRef.child("activePots").child(potOwned.potId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                potOwned = (Pot) dataSnapshot.getValue(Pot.class);
+                moneyInPot.setText(Integer.toString(potOwned.money) + " DT");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         potOwnedName = (TextView) view.findViewById(R.id.potOwnedName);
         potOwnedName.setText(potOwned.potName);
         potOwnedType = (TextView) view.findViewById(R.id.potOwnedType);
@@ -76,7 +92,6 @@ public class PotProfilForOwnerFragment extends Fragment implements View.OnClickL
         buttonPutMoney.setOnClickListener(this);
         buttonSpendPot = (Button) view.findViewById(R.id.buttonSpendPot);
         buttonSpendPot.setOnClickListener(this);
-
 
         return view;
     }
@@ -143,28 +158,161 @@ public class PotProfilForOwnerFragment extends Fragment implements View.OnClickL
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
 
         View mView = getActivity().getLayoutInflater().inflate(R.layout.dialog_put_money, null);
-
-        final EditText mEmail = (EditText) mView.findViewById(R.id.etEmail);
+        boolean ok = false;
+        final EditText moneyToPut = (EditText) mView.findViewById(R.id.moneyToPut);
         final EditText mPassword = (EditText) mView.findViewById(R.id.etPassword);
-        Button mLogin = (Button) mView.findViewById(R.id.btnLogin);
+        final TextView confirmationMessage = (TextView) mView.findViewById(R.id.confirmationMessage);
+        Button verify = (Button) mView.findViewById(R.id.buttonVerify);
+        Button confirm = (Button) mView.findViewById(R.id.buttonConfirm);
+        Button cancel = (Button) mView.findViewById(R.id.buttonCancel);
 
-
-        mBuilder.setPositiveButton("Login", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-
-        mBuilder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
         mBuilder.setView(mView);
         final AlertDialog dialog = mBuilder.create();
         dialog.show();
+
+        verify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (moneyToPut.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(getActivity(), "Entrer le montant à verser", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                int toPutMoney = Integer.parseInt(moneyToPut.getText().toString());
+                if (toPutMoney < 0) {
+                    Toast.makeText(getActivity(), "Entré est invalide", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    confirmationMessage.setText("Montant à verser: " + Integer.toString(toPutMoney) + " Dt");
+                }
+
+            }
+
+        });
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String msgC = confirmationMessage.getText().toString();
+                if (msgC.equals("Montant à verser:")) {
+                    Toast.makeText(getActivity(), "Verifier le montant à verser", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!msgC.equals("Montant à verser: " + moneyToPut.getText().toString() + " Dt")) {
+                    Toast.makeText(getActivity(), "Reverifier le montant à verser", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (mPassword.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(), "Confirmer en entrant votre mot de passe", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+//                    Toast.makeText(getActivity(), "Veuillez patienter", Toast.LENGTH_SHORT).show();
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    final DatabaseReference myDataRef = FirebaseDatabase.getInstance().getReference();
+                    final DatabaseReference myRef = myDataRef.child("users").child(mAuth.getCurrentUser().getUid());
+                    myRef.addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            User tmpuser = (User)dataSnapshot.getValue(User.class);
+                            if (tmpuser.password == null){
+                                return;
+                            }
+                            String password = mPassword.getText().toString();
+                            try {
+                                password = MD5.crypt(password);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Toast.makeText(getActivity(), "Erreur de sécurité, Réessayer", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            if (!tmpuser.password.equals(password)) {
+                                Toast.makeText(getActivity(), "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            int toPutMoney = Integer.parseInt(moneyToPut.getText().toString());
+                            if (tmpuser.money < toPutMoney) {
+                                Toast.makeText(getActivity(), "Vous n'avez pas assez d'argent", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            potOwned.addMoney(toPutMoney);
+                            tmpuser.takeMoney(toPutMoney);
+                            myDataRef.child("activePots").child(potOwned.potId).setValue(potOwned);
+                            myRef.child("userInfo").child("money").setValue(tmpuser.money);
+                            Toast.makeText(getActivity(), "Versement avec succée", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                            return;
+                        }
+
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+//                    myRef.child("userInfo").addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+//                            User tmpuser = dataSnapshot.getValue(User.class);
+//                            String password = mPassword.getText().toString();
+//                            try {
+//                                password = MD5.crypt(password);
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                                Toast.makeText(getActivity(), "Erreur de sécurité, Réessayer", Toast.LENGTH_SHORT).show();
+//                                return;
+//                            }
+//                            if (!tmpuser.password.equals(password)) {
+//                                Toast.makeText(getActivity(), "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
+//                                return;
+//                            }
+//                            int toPutMoney = Integer.parseInt(moneyToPut.getText().toString());
+//                            if (tmpuser.money < toPutMoney) {
+//                                Toast.makeText(getActivity(), "Vous n'avez pas assez d'argent", Toast.LENGTH_SHORT).show();
+//                                return;
+//                            }
+//                            potOwned.addMoney(toPutMoney);
+//                            tmpuser.takeMoney(toPutMoney);
+//                            myDataRef.child("activePots").child(potOwned.potId).setValue(potOwned);
+//    //                        myRef.child("userInfo").updateChildren("money",tmpuser.money);
+//                            Toast.makeText(getActivity(), "Versement avec succée", Toast.LENGTH_SHORT).show();
+//                            dialog.dismiss();
+//                            return;
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                        }
+//                    });
+
+                }
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
     }
+
 
 }

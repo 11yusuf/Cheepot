@@ -26,4 +26,11 @@ public class User {
         this.name = user.name;
         this.familyName = user.familyName;
     }
+    public void takeMoney(int money){
+        this.money -= money;
+    }
+
+    public void addmoney(int money){
+        this.money += money;
+    }
 }
