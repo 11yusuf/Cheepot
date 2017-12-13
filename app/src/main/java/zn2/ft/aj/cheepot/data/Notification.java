@@ -1,6 +1,8 @@
 package zn2.ft.aj.cheepot.data;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  * Created by lenovo-pc on 13/12/2017.
@@ -23,7 +25,7 @@ public class Notification {
 
     public Notification(String notifierId, String notifierName, String potId,
                         String potName, String toNotifyId, String notifId,
-                        int type, String creationDate, int moneyAdded, int previousMoney, int followersNumber) {
+                        int type, int moneyAdded, int previousMoney, int followersNumber) {
 
         this.notifierId = notifierId;
         this.notifierName = notifierName;
@@ -32,7 +34,8 @@ public class Notification {
         this.toNotifyId = toNotifyId;
         this.notifId = notifId;
         this.type = type;
-        this.creationDate = creationDate;
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        this.creationDate = fmt.print(new DateTime());
         this.moneyAdded = moneyAdded;
         this.previousMoney = previousMoney;
         this.followersNumber = followersNumber;
@@ -47,7 +50,7 @@ public class Notification {
     }
 
     public void setterNotif(String toNotifyId, String notifId,
-                            int type, String creationDate, int moneyAdded, int previousMoney, int followersNumber) {
+                            int type, int moneyAdded, int previousMoney, int followersNumber) {
         this.toNotifyId = toNotifyId;
         this.notifId = notifId;
         this.type = type;

@@ -71,7 +71,7 @@ public class NotificationsFragment extends Fragment {
                             Notification notification = dataSnapshot.child(notificationsId.get(i).toString()).getValue(Notification.class);
 
                             if (notification.type == 1) {
-                                ((TextView) item.findViewById(R.id.title)).setText(notification.notifierName + " a suivi" + notification.potName);
+                                ((TextView) item.findViewById(R.id.title)).setText(notification.notifierName + " a suivi " + notification.potName);
                                 ((TextView) item.findViewById(R.id.creationDate)).setText(notification.creationDate);
                                 View subItemZero = item.getSubItemView(0);
 
@@ -80,7 +80,7 @@ public class NotificationsFragment extends Fragment {
                                 item.setIndicatorIconRes(R.drawable.ic_star);
                             }
                             if (notification.type == 2) {
-                                ((TextView) item.findViewById(R.id.title)).setText(notification.notifierName + " a versé" + notification.moneyAdded + "dans" + notification.potName);
+                                ((TextView) item.findViewById(R.id.title)).setText(notification.notifierName + " a versé " + notification.moneyAdded + " dans " + notification.potName);
                                 ((TextView) item.findViewById(R.id.creationDate)).setText(notification.creationDate);
 
                                 int totalMoney = notification.previousMoney + notification.moneyAdded;

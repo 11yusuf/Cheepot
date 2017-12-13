@@ -242,10 +242,10 @@ public class PotProfilForVisitorFragment extends Fragment implements View.OnClic
                                 return;
                             }
                             DatabaseReference notifData = myDataRefer.child("notifications").push();
-                            DateTime now = DateTime.now();
+
                             Notification notification = new Notification(mAuth.getCurrentUser().getUid().toString(),
                                     tmpuser.name + " " + tmpuser.familyName, potVisited.potId, potVisited.potName,
-                                    potVisited.creatorUid, notifData.getKey(), 2, now.toString(), toPutMoney, potVisited.money,
+                                    potVisited.creatorUid, notifData.getKey(), 2, toPutMoney, potVisited.money,
                                     potVisited.followers);
                             notifData.setValue(notification);
                             myDataRefer.child("users").child(potVisited.creatorUid).child("notifications").child(notifData.getKey()).setValue(notifData.getKey());
