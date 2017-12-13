@@ -28,6 +28,7 @@ import java.util.List;
 
 import zn2.ft.aj.cheepot.R;
 import zn2.ft.aj.cheepot.adpater.PotAdapter;
+import zn2.ft.aj.cheepot.data.Notification;
 import zn2.ft.aj.cheepot.data.Pot;
 
 /**
@@ -46,10 +47,11 @@ public class NotificationsFragment extends Fragment {
     DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private CardView myItem;
-    private List potsId;
+    private List notificationsId;
 
 
     private ExpandingItem tt;
+
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,50 +62,51 @@ public class NotificationsFragment extends Fragment {
         final ExpandingList expandingList = (ExpandingList) view.findViewById(R.id.expanding_list_main);
 
 
-        potsId = new ArrayList();
+        notificationsId = new ArrayList();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("createdPots").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("notifications").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> potspointer = dataSnapshot.getChildren();
                 for (DataSnapshot c : potspointer) {
                     String k = c.getValue(String.class);
-                    potsId.add(k);
+                    notificationsId.add(k);
                 }
-                mDatabase.child("activePots").addValueEventListener(new ValueEventListener() {
+                mDatabase.child("notifications").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        List<Pot> TT = new ArrayList<Pot>();
-                        for (int i = 0; i < potsId.size(); i++) {
+
+                        for (int i = 0; i < notificationsId.size(); i++) {
                             ExpandingItem item = expandingList.createNewItem(R.layout.expanding_layout);
-                            item.createSubItems(2);
+                            item.createSubItems(1);
 
-                            Pot T = dataSnapshot.child(potsId.get(i).toString()).getValue(Pot.class);
+                            Notification notification = dataSnapshot.child(notificationsId.get(i).toString()).getValue(Notification.class);
 
-                            ((TextView) item.findViewById(R.id.title)).setText(T.potName);
-                            View subItemZero = item.getSubItemView(0);
-                            ((TextView) subItemZero.findViewById(R.id.sub_title)).setText(Integer.toString(T.money));
+                            if (notification.type == 1) {
+                                ((TextView) item.findViewById(R.id.title)).setText(notification.notifierName + " a suivi" + notification.potName);
+                                ((TextView) item.findViewById(R.id.creationDate)).setText(notification.creationDate);
+                                View subItemZero = item.getSubItemView(0);
 
-                            View subItemOne = item.getSubItemView(1);
-                            ((TextView) subItemOne.findViewById(R.id.sub_title)).setText(Integer.toString(T.money));
+                                ((TextView) subItemZero.findViewById(R.id.sub_title)).setText(notification.followersNumber);
+                                item.setIndicatorColorRes(R.color.grapefruit_1);
+                                item.setIndicatorIconRes(R.drawable.ic_star);
+                            }
+                            if (notification.type == 2) {
+                                ((TextView) item.findViewById(R.id.title)).setText(notification.notifierName + " a versé" + notification.moneyAdded + "dans" + notification.potName);
+                                ((TextView) item.findViewById(R.id.creationDate)).setText(notification.creationDate);
 
-                            item.setIndicatorColorRes(R.color.bittersweet);
-                            item.setIndicatorIconRes(R.drawable.ic_find);
+                                int totalMoney = notification.previousMoney + notification.moneyAdded;
+                                View subItemZero = item.getSubItemView(0);
+                                ((TextView) subItemZero.findViewById(R.id.sub_title)).setText(notification.previousMoney +">>" + Integer.toString(totalMoney));
+
+                                item.setIndicatorColorRes(R.color.mint_1);
+                                item.setIndicatorIconRes(R.drawable.ic_pomegranate);
+                            }
 
                         }
-                }
-
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
                     }
-                });
-
-
-            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -112,6 +115,15 @@ public class NotificationsFragment extends Fragment {
         });
 
 
+    }
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
 
-    return view; }}
+    }
+});
+
+
+        return view;
+        }
+        }
 
