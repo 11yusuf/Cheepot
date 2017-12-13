@@ -61,6 +61,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
+//        mAuth.signOut();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null){

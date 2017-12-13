@@ -1,20 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.diegodobelo.expandingview.ExpandingList xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/n_z"
+    android:id="@+id/expanding_list_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".fragments.MyPotsFragment"
-    android:background="#c2dbfd"
-    >
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        >
-    </android.support.v7.widget.RecyclerView>
-</RelativeLayout>
+    tools:context=".fragments.MyPotsFragment" />
+

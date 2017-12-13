@@ -41,6 +41,10 @@ dependencies {
     compile 'com.github.varunest:sparkbutton:1.0.5'
     compile 'com.android.support:recyclerview-v7:26.0.1'
     implementation 'joda-time:joda-time:2.3'
+
+}
+dependencies {
+    compile 'com.diegodobelo.expandingview:expanding-view:0.9.4'
 }
 allprojects {
     repositories {
