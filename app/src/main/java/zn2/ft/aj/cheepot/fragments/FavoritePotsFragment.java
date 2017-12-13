@@ -55,7 +55,7 @@ public class FavoritePotsFragment extends Fragment {
         potsId = new ArrayList();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("createdPots").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).child("favoritePots").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> potspointer = dataSnapshot.getChildren();
@@ -75,14 +75,11 @@ public class FavoritePotsFragment extends Fragment {
                         mRecyclerView.setAdapter(mAdapter);
                     }
 
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
                     }
                 });
-
-
             }
 
             @Override
@@ -90,9 +87,6 @@ public class FavoritePotsFragment extends Fragment {
 
             }
         });
-
-        myItem = (CardView) view.findViewById(R.id.card_view);
-
         return view;
     }
 

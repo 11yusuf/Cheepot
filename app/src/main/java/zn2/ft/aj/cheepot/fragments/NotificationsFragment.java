@@ -37,30 +37,18 @@ import zn2.ft.aj.cheepot.data.Pot;
 
 public class NotificationsFragment extends Fragment {
 
-    private Context mContext;
-
-    RelativeLayout mRelativeLayout;
-    private RecyclerView mRecyclerView;
-
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private CardView myItem;
     private List notificationsId;
-
-
-    private ExpandingItem tt;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_notifications, container, false);
-        mContext = getActivity().getApplicationContext();
 
         final ExpandingList expandingList = (ExpandingList) view.findViewById(R.id.expanding_list_main);
-
 
         notificationsId = new ArrayList();
         mAuth = FirebaseAuth.getInstance();
@@ -79,9 +67,7 @@ public class NotificationsFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         for (int i = 0; i < notificationsId.size(); i++) {
-                            ExpandingItem item = expandingList.createNewItem(R.layout.expanding_layout);
-                            item.createSubItems(1);
-
+                            ExpandingItem item = expandingList.createNewItem(R.layout.expanding_layout);item.createSubItems(1);
                             Notification notification = dataSnapshot.child(notificationsId.get(i).toString()).getValue(Notification.class);
 
                             if (notification.type == 1) {
@@ -99,7 +85,7 @@ public class NotificationsFragment extends Fragment {
 
                                 int totalMoney = notification.previousMoney + notification.moneyAdded;
                                 View subItemZero = item.getSubItemView(0);
-                                ((TextView) subItemZero.findViewById(R.id.sub_title)).setText(notification.previousMoney +">>" + Integer.toString(totalMoney));
+                                ((TextView) subItemZero.findViewById(R.id.sub_title)).setText(notification.previousMoney + " >> " + Integer.toString(totalMoney));
 
                                 item.setIndicatorColorRes(R.color.mint_1);
                                 item.setIndicatorIconRes(R.drawable.ic_pomegranate);
@@ -108,6 +94,15 @@ public class NotificationsFragment extends Fragment {
                         }
                     }
 
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+
+            }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
@@ -115,15 +110,7 @@ public class NotificationsFragment extends Fragment {
         });
 
 
-    }
-    @Override
-    public void onCancelled(DatabaseError databaseError) {
-
-    }
-});
-
-
         return view;
-        }
-        }
+    }
+}
 

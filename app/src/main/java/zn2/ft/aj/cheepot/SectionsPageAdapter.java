@@ -1,4 +1,4 @@
-package faa.aj.test2;
+package zn2.ft.aj.cheepot;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

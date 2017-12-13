@@ -28,6 +28,7 @@ import java.util.List;
 
 import zn2.ft.aj.cheepot.R;
 import zn2.ft.aj.cheepot.data.MD5;
+import zn2.ft.aj.cheepot.data.Notification;
 import zn2.ft.aj.cheepot.data.Pot;
 import zn2.ft.aj.cheepot.data.User;
 
@@ -208,7 +209,7 @@ public class PotProfilForOwnerFragment extends Fragment implements View.OnClickL
                     return;
                 } else {
 //                    Toast.makeText(getActivity(), "Veuillez patienter", Toast.LENGTH_SHORT).show();
-                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    final FirebaseAuth mAuth = FirebaseAuth.getInstance();
                     final DatabaseReference myDataRef = FirebaseDatabase.getInstance().getReference();
                     final DatabaseReference myRef = myDataRef.child("users").child(mAuth.getCurrentUser().getUid());
                     myRef.addChildEventListener(new ChildEventListener() {
@@ -241,7 +242,7 @@ public class PotProfilForOwnerFragment extends Fragment implements View.OnClickL
                             myRef.child("userInfo").child("money").setValue(tmpuser.money);
                             Toast.makeText(getActivity(), "Versement avec succée", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
-                            return;
+
                         }
 
                         @Override
@@ -264,43 +265,6 @@ public class PotProfilForOwnerFragment extends Fragment implements View.OnClickL
 
                         }
                     });
-
-//                    myRef.child("userInfo").addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            User tmpuser = dataSnapshot.getValue(User.class);
-//                            String password = mPassword.getText().toString();
-//                            try {
-//                                password = MD5.crypt(password);
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                                Toast.makeText(getActivity(), "Erreur de sécurité, Réessayer", Toast.LENGTH_SHORT).show();
-//                                return;
-//                            }
-//                            if (!tmpuser.password.equals(password)) {
-//                                Toast.makeText(getActivity(), "Mot de passe incorrect", Toast.LENGTH_SHORT).show();
-//                                return;
-//                            }
-//                            int toPutMoney = Integer.parseInt(moneyToPut.getText().toString());
-//                            if (tmpuser.money < toPutMoney) {
-//                                Toast.makeText(getActivity(), "Vous n'avez pas assez d'argent", Toast.LENGTH_SHORT).show();
-//                                return;
-//                            }
-//                            potOwned.addMoney(toPutMoney);
-//                            tmpuser.takeMoney(toPutMoney);
-//                            myDataRef.child("activePots").child(potOwned.potId).setValue(potOwned);
-//    //                        myRef.child("userInfo").updateChildren("money",tmpuser.money);
-//                            Toast.makeText(getActivity(), "Versement avec succée", Toast.LENGTH_SHORT).show();
-//                            dialog.dismiss();
-//                            return;
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {
-//
-//                        }
-//                    });
-
                 }
             }
         });
