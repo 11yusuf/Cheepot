@@ -18,9 +18,7 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".SignUpActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -29,22 +27,19 @@
             android:name=".HomeActivity"
             android:label="Cheepot"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".SignUpPartnerActivity1"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".SignUpPartnerActivity2"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".PotCreationActivity"
             android:theme="@style/AppTheme2"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
-        <activity android:name=".ChargerCompteActivity">
-        </activity>
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ChargerCompteActivity" />
+        <activity android:name=".PartnersListActivity"></activity>
     </application>
 
 </manifest>

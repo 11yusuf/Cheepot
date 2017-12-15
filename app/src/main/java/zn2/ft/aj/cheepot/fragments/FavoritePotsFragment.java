@@ -34,7 +34,7 @@ public class FavoritePotsFragment extends Fragment {
 
     private Context mContext;
 
-    RelativeLayout mRelativeLayout;
+
     private RecyclerView mRecyclerView;
 
     private RecyclerView.Adapter mAdapter;

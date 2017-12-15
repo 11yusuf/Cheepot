@@ -1,5 +1,6 @@
 package zn2.ft.aj.cheepot.fragments;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -25,6 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import zn2.ft.aj.cheepot.PartnersListActivity;
 
 import zn2.ft.aj.cheepot.R;
 import zn2.ft.aj.cheepot.data.MD5;
@@ -141,7 +144,9 @@ public class PotProfilForOwnerFragment extends Fragment implements View.OnClickL
 
         }
         if (v == buttonSpendPot) {
-
+            Intent goToSite = new Intent(getActivity(), PartnersListActivity.class);
+            startActivity(goToSite);
+            getActivity().finish();
         }
     }
 
