@@ -67,7 +67,8 @@ public class NotificationsFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         for (int i = 0; i < notificationsId.size(); i++) {
-                            ExpandingItem item = expandingList.createNewItem(R.layout.expanding_layout);item.createSubItems(1);
+                            ExpandingItem item = expandingList.createNewItem(R.layout.expanding_layout);
+                            item.createSubItems(1);
                             Notification notification = dataSnapshot.child(notificationsId.get(i).toString()).getValue(Notification.class);
 
                             if (notification.type == 1) {
@@ -80,12 +81,12 @@ public class NotificationsFragment extends Fragment {
                                 item.setIndicatorIconRes(R.drawable.ic_star);
                             }
                             if (notification.type == 2) {
-                                ((TextView) item.findViewById(R.id.title)).setText(notification.notifierName + " a versé " + notification.moneyAdded + " dans " + notification.potName);
+                                ((TextView) item.findViewById(R.id.title)).setText(notification.notifierName + " a versé " + notification.moneyAdded + " DT dans " + notification.potName);
                                 ((TextView) item.findViewById(R.id.creationDate)).setText(notification.creationDate);
 
                                 int totalMoney = notification.previousMoney + notification.moneyAdded;
                                 View subItemZero = item.getSubItemView(0);
-                                ((TextView) subItemZero.findViewById(R.id.sub_title)).setText(notification.previousMoney + " >> " + Integer.toString(totalMoney));
+                                ((TextView) subItemZero.findViewById(R.id.sub_title)).setText(notification.previousMoney + " DT >> " + Integer.toString(totalMoney)+" DT");
 
                                 item.setIndicatorColorRes(R.color.mint_1);
                                 item.setIndicatorIconRes(R.drawable.ic_pomegranate);

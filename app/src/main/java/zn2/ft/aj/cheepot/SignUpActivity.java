@@ -213,8 +213,9 @@ public class SignUpActivity extends Activity implements OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            sendVerificationEmail();
+//                            sendVerificationEmail();
                             Toast.makeText(SignUpActivity.this, "Un email de confirmation a été envoyé ", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, mAuth.getCurrentUser().getUid().toString(), Toast.LENGTH_SHORT).show();
                             DatabaseReference currentUserDb = myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("userInfo");
                             User user = new User(name, familyName, String.format("%d/%d/%d", day, month, year), password, plants[gender], 0);
                             currentUserDb.setValue(user);

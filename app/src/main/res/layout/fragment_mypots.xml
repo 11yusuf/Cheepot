@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     tools:context=".fragments.MyPotsFragment"
-    android:background="#c2dbfd"
+    android:background="@color/cardview_light_background"
     >
 <android.support.v7.widget.RecyclerView
     android:id="@+id/recycler_view"
