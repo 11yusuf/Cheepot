@@ -113,11 +113,9 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
             public void onEventAnimationEnd(ImageView button, boolean buttonState) {
                 if (!ko) {
                     Intent goTo;
-                    goTo = new Intent(view.getContext(), PotCreationActivity.class);
-                    goTo.putExtra("typeEntry",1);
-                    goTo.putExtra("pot",potToCreate);
-                    startActivity(goTo);
+                    goTo = new Intent(view.getContext(), HomeActivity.class);
                     getActivity().finish();
+                    startActivity(goTo);
                 }
             }
 
@@ -135,10 +133,17 @@ public class PotCreationFragment extends Fragment implements View.OnClickListene
                     potToCreate.setter(Description, yearF, monthF, dayF, potsDb.getKey());
                     currentUserDb.child(potsDb.getKey()).setValue(potsDb.getKey(), "key");
                     potsDb.setValue(potToCreate);
+                    myRef.child("recherche").child(potToCreate.potName+potsDb.getKey()).setValue(potToCreate.potName+potsDb.getKey());
                 }
             }
         });
         return view;
+    }
+
+    @Override
+    public void onDetach (){
+        super.onDetach();
+        getActivity().finish();
     }
 
     @Override

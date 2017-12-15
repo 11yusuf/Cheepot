@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.diegodobelo.expandingview.ExpandingItem;
 import com.diegodobelo.expandingview.ExpandingList;
@@ -61,20 +62,21 @@ public class NotificationsFragment extends Fragment {
                 for (DataSnapshot c : potspointer) {
                     String k = c.getValue(String.class);
                     notificationsId.add(k);
+//                    Toast.makeText(getActivity(),k ,Toast.LENGTH_SHORT).show();
                 }
                 mDatabase.child("notifications").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
                         for (int i = 0; i < notificationsId.size(); i++) {
-                            ExpandingItem item = expandingList.createNewItem(R.layout.expanding_layout);item.createSubItems(1);
+                            ExpandingItem item = expandingList.createNewItem(R.layout.expanding_layout);
+                            item.createSubItems(1);
                             Notification notification = dataSnapshot.child(notificationsId.get(i).toString()).getValue(Notification.class);
-
+//                            Toast.makeText(getActivity(),notification.potName,Toast.LENGTH_SHORT).show();
                             if (notification.type == 1) {
                                 ((TextView) item.findViewById(R.id.title)).setText(notification.notifierName + " a suivi " + notification.potName);
                                 ((TextView) item.findViewById(R.id.creationDate)).setText(notification.creationDate);
                                 View subItemZero = item.getSubItemView(0);
-
                                 ((TextView) subItemZero.findViewById(R.id.sub_title)).setText(notification.followersNumber);
                                 item.setIndicatorColorRes(R.color.grapefruit_1);
                                 item.setIndicatorIconRes(R.drawable.ic_star);

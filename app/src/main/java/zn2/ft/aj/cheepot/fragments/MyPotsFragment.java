@@ -4,19 +4,11 @@ package zn2.ft.aj.cheepot.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SnapHelper;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,14 +30,11 @@ import zn2.ft.aj.cheepot.data.Pot;
 public class MyPotsFragment extends Fragment {
 
     private Context mContext;
-    RelativeLayout mRelativeLayout;
     private RecyclerView mRecyclerView;
-
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-    private CardView myItem;
     private List potsId;
 
     @Override

@@ -50,8 +50,10 @@ import static android.app.DatePickerDialog.*;
 import static android.graphics.Color.TRANSPARENT;
 
 public class SignUpActivity extends Activity implements OnClickListener {
-    private FirebaseAuth mAuth;
-    DatabaseReference myRef;
+    public FirebaseAuth mAuth;
+    public DatabaseReference myRef;
+    public FirebaseAuth mAuth2;
+    public DatabaseReference myRef2;
     private Button buttonRegister;
     private EditText editName;
     private EditText editFamilyName;
@@ -82,6 +84,10 @@ public class SignUpActivity extends Activity implements OnClickListener {
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
         myRef = FirebaseDatabase.getInstance().getReference();
+
+        mAuth2 = FirebaseAuth.getInstance();
+        myRef2 = FirebaseDatabase.getInstance().getReference();
+
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         editName = (EditText) findViewById(R.id.editName);
         editFamilyName = (EditText) findViewById(R.id.editFamilyName);
@@ -213,15 +219,30 @@ public class SignUpActivity extends Activity implements OnClickListener {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            sendVerificationEmail();
-                            Toast.makeText(SignUpActivity.this, "Un email de confirmation a été envoyé ", Toast.LENGTH_SHORT).show();
-                            DatabaseReference currentUserDb = myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("userInfo");
-                            User user = new User(name, familyName, String.format("%d/%d/%d", day, month, year), password, plants[gender], 0);
-                            currentUserDb.setValue(user);
-                            Intent homeIntent = new Intent(SignUpActivity.this, LoginActivity.class);
-                            mAuth.signOut();
-                            startActivity(homeIntent);
-                            finish();
+                            FirebaseUser usere = mAuth2.getCurrentUser();
+                            if (usere != null) {
+                                usere.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(SignUpActivity.this, "Un email de confirmation a été envoyé ", Toast.LENGTH_SHORT).show();
+                                            DatabaseReference currentUserDb = myRef2.child("users").child(mAuth2.getCurrentUser().getUid().toString()).child("userInfo");
+                                            User user = new User(name, familyName, String.format("%d/%d/%d", day, month, year), password, plants[gender], 0);
+                                            currentUserDb.setValue(user);
+                                            Intent homeIntent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                            mAuth2.signOut();
+                                            startActivity(homeIntent);
+                                            finish();
+                                            return;
+                                        } else {
+                                            Toast.makeText(SignUpActivity.this, "un probléme de vérification email.", Toast.LENGTH_SHORT).show();
+                                            return;
+                                        }
+                                    }
+                                });
+                            }
+
+
                         } else {
                             Toast.makeText(SignUpActivity.this, "Vous êtes déjà inscrit", Toast.LENGTH_SHORT).show();
                         }
@@ -278,12 +299,13 @@ public class SignUpActivity extends Activity implements OnClickListener {
 
 
     public void sendVerificationEmail() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = mAuth2.getCurrentUser();
         if (user != null) {
             user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
+                        Toast.makeText(SignUpActivity.this, "Un email de confirmation a été envoyé ", Toast.LENGTH_SHORT).show();
                         return;
                     } else {
                         Toast.makeText(SignUpActivity.this, "un probléme de vérification email.", Toast.LENGTH_SHORT).show();

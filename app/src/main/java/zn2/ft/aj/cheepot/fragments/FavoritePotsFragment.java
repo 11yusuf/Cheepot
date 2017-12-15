@@ -33,15 +33,11 @@ import zn2.ft.aj.cheepot.data.Pot;
 public class FavoritePotsFragment extends Fragment {
 
     private Context mContext;
-
-    RelativeLayout mRelativeLayout;
     private RecyclerView mRecyclerView;
-
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-    private CardView myItem;
     private List potsId;
 
     @Override
@@ -89,5 +85,4 @@ public class FavoritePotsFragment extends Fragment {
         });
         return view;
     }
-
 }

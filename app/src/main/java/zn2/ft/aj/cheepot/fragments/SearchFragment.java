@@ -1,44 +1,40 @@
 package zn2.ft.aj.cheepot.fragments;
 
-
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.EditText;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import zn2.ft.aj.cheepot.R;
 
-import zn2.ft.aj.cheepot.data.Pot;
+public class SearchFragment extends Fragment implements View.OnClickListener {
+    EditText searchWord;
 
-/**
- * Created by lenovo-pc on 06/12/2017.
- */
+    public SearchFragment() {
+        // Required empty public constructor
+    }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-public class SearchFragment extends android.support.v4.app.Fragment {
-}
-    /*private FirebaseAuth mAuth;
-    DatabaseReference databaseReference ;
-    View view;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        databaseReference = FirebaseDatabase.getInstance().getReference("activePots").child("potName");
-        databaseReference.orderByChild("Mariage").equalTo(1).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Pot tt = dataSnapshot.getValue(Pot.class);
-                Toast.makeText(getActivity(), tt.potName, Toast.LENGTH_SHORT).show();
-            }
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        searchWord = (EditText) view.findViewById(R.id.searchWord);
+        return view;
+    }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });*/
+    @Override
+    public void onClick(View v) {
 
+    }
+}

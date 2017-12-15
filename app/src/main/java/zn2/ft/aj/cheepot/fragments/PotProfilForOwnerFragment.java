@@ -208,7 +208,6 @@ public class PotProfilForOwnerFragment extends Fragment implements View.OnClickL
                     Toast.makeText(getActivity(), "Confirmer en entrant votre mot de passe", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-//                    Toast.makeText(getActivity(), "Veuillez patienter", Toast.LENGTH_SHORT).show();
                     final FirebaseAuth mAuth = FirebaseAuth.getInstance();
                     final DatabaseReference myDataRef = FirebaseDatabase.getInstance().getReference();
                     final DatabaseReference myRef = myDataRef.child("users").child(mAuth.getCurrentUser().getUid());
@@ -242,7 +241,6 @@ public class PotProfilForOwnerFragment extends Fragment implements View.OnClickL
                             myRef.child("userInfo").child("money").setValue(tmpuser.money);
                             Toast.makeText(getActivity(), "Versement avec succée", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
-
                         }
 
                         @Override

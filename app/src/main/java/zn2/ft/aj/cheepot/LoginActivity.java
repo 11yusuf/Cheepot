@@ -100,21 +100,21 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                         progressDialog.dismiss();
                         if(task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
-//                            Intent goToProfil = new Intent(LoginActivity.this, HomeActivity.class);
-//                            startActivity(goToProfil);
-//                            finish();
-                            try{
-                                if(user.isEmailVerified()){
-                                    Intent goToProfil = new Intent(LoginActivity.this, HomeActivity.class);
-                                    startActivity(goToProfil);
-                                    finish();
-                                }else{
-                                    Toast.makeText(LoginActivity.this, "Votre Email n'est pas vérifié \n vérifiez votre email courrier.", Toast.LENGTH_SHORT).show();
-                                    mAuth.signOut();
-                                }
-                            }catch (NullPointerException e){
-                                Log.e(TAG, "onComplete: NullPointerException: " + e.getMessage() );
-                            }
+                            Intent goToProfil = new Intent(LoginActivity.this, HomeActivity.class);
+                            startActivity(goToProfil);
+                            finish();
+//                            try{
+//                                if(user.isEmailVerified()){
+//                                    Intent goToProfil = new Intent(LoginActivity.this, HomeActivity.class);
+//                                    startActivity(goToProfil);
+//                                    finish();
+//                                }else{
+//                                    Toast.makeText(LoginActivity.this, "Votre Email n'est pas vérifié \n vérifiez votre email courrier.", Toast.LENGTH_SHORT).show();
+//                                    mAuth.signOut();
+//                                }
+//                            }catch (NullPointerException e){
+//                                Log.e(TAG, "onComplete: NullPointerException: " + e.getMessage() );
+//                            }
                         }else {
                             Toast.makeText(LoginActivity.this, "Email ou mot de passe incorrect", Toast.LENGTH_SHORT).show();
                         }
